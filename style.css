@@ -1,9 +1,45 @@
-html{
+*{
     margin: O;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body{
+    display: grid;
+    justify-content: center;
+    place-items: center;
     background-color: darkolivegreen;
     color: cornsilk;
+    margin: auto;
+    text-align: center;
+}
+nav{
+    float: right;
+}
+.nav-link {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.nav-link,li {
+    display: inline-block;
+    margin-left: 20px;
+}
+.nav-link,li,a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: cornsilk;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+
+
+#logo{
+    float: left;
+    font-size: 40px;
+    font-weight: bolder;
+    margin-left: 20px;
+    padding: 15px;
 }
