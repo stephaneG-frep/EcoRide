@@ -4,7 +4,7 @@
 require_once "include/head.php";
 require_once "include/header.php";
 require_once "fonctions.php";
-require_once "Database.php";
+require_once "db/Database.php";
 
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -31,17 +31,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
 ?>
-
-<style>
-    .error { color: red; }
-</style>
-
-
 <div class="inscrip">
 
-<?php if (isset($error)): ?>
-    <p class="error"><?php echo $error; ?></p>
-<?php endif; ?>
+
 
     <form method="POST" action="index.php" enctype="multipart/form-data">
         Nom d'utilisateur : 
