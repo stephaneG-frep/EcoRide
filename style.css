@@ -34,6 +34,47 @@ nav{
     display: inline-block;
 }
 
+h1 {
+    display: grid;
+    place-items: center;
+    background: -webkit-linear-gradient(rgb(241, 5, 5)0%, rgb(253, 228, 4));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 25px;
+    text-decoration-line: underline;
+    margin-bottom: 20px;
+    font-size: 52px;
+}
+
+
+.item-1 {
+    display: grid;
+    background: -webkit-linear-gradient(0deg,#2874A6 0%, #07cc56 100%);
+    border-radius: 1280px 420px 600px 0px;
+    border: solid #8c10df 4px;
+    place-items: center;
+    padding: 25px;
+    margin-bottom: 20px;
+ }
+.item-1a {
+    display: grid;
+    place-items: center;
+    background: -webkit-linear-gradient(0deg,olive 0%, orange 100%);
+    border-radius: 45px 450px 300px;
+    border: #16bd16 solid 3px;
+    padding: 30px;
+    margin-bottom: 20px;
+ }
+ p { 
+    font-weight: bold;
+    width: 80%;
+    height: auto;
+    margin: auto;
+    background: -webkit-linear-gradient(#920505, #0f21be);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: rgb(27, 26, 20) 2px 4px 10px;
+ }
 
 
 #logo{
@@ -42,4 +83,29 @@ nav{
     font-weight: bolder;
     margin-left: 20px;
     padding: 15px;
+}
+
+.inscrip{
+    width: 70%;
+    height: auto;
+    background-color: cornflowerblue;
+    padding: 30px;
+    margin-top: 80px;
+}
+input, label{
+    display: grid;
+    place-items: center;
+    padding: 10px;
+    margin: auto;
+}
+
+footer { 
+    display: grid;
+    place-items: center;
+    width: 100%;
+    background-color: rgb(71, 77, 62); 
+    color: darkorange; 
+    border: 4px solid #063f06;
+    margin-top: 100px;  
+    margin-bottom: 10px;
 }
