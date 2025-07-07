@@ -1,7 +1,7 @@
 <?php
 
 //inclure le fichier de connexion 
-require_once "db/Database.php";
+require_once "./db/Database.php";
 // class pour gérer les utilisateurs
 class Users{
 
@@ -27,12 +27,12 @@ class Users{
 
     // methode pour enregister en base
     public function register($username,$email,$password,$tel,$departement,
-                             $vehicule,$place,$tarif,$description,$photo_profil) {
+                             $vehicule,$place,$tarif,$description,$photo_profil){
             //securiser le password avec password_hash
-            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Requête préparée pour éviter les injections SQL
-            $query = "INSERT INTO users (username,email,password,tel,departement,vehicule
+            $query = "INSERT INTO users(username,email,password,tel,departement,vehicule
                                         ,place,tarif,description,photo_profil) 
                       VALUES (:username,:email,:password,:tel,:departement,:vehicule,
                               :place,:tarif,:description,:photo_profil)";
