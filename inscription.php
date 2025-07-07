@@ -4,20 +4,25 @@
 require_once "include/head.php";
 require_once "include/header.php";
 require_once "fonctions.php";
+require_once "Database.php";
 
-//condition d'appel a la fonction de nettoyage securitaire 
-if(isset($_POST['inscription']) && !empty($_POST['inscription'])){
-    $username = check($_POST['username']);
-    $email = check($_POST['email']);
-    $password = check($_POST['password']);
-    $password_confirm= check($_POST['password_confirm']);
-    $tel = check(($_POST['tel']));
-    $departement = check($_POST['departement']);
-    $vehicule = check($_POST['vehicule']);
-    $place = check($_POST['place']);
-    $tarif =check($_POST['tarif']);
-    $description = check($_POST['description']);
-    $photo_profil = check($_POST['photo_profil']);
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $user = new Users();
+//conndition d'appel a la fonction(check) nettoyage securitaire 
+    if(isset($_POST['inscription']) && !empty($_POST['inscription'])){
+        $username = htmlspecialchars(check($_POST['username']));
+        $email = htmlspecialchars(check($_POST['email']));
+        $password = check($_POST['password']);
+        $tel = htmlspecialchars(check($_POST['tel']));
+        $departement = check($_POST['departement']);
+        $vehicule = htmlspecialchars(check($_POST['vehicule']));
+        $place = htmlspecialchars(check($_POST['place']));
+        $tarif = htmlspecialchars(check($_POST['tarif']));
+        $description = htmlspecialchars(check($_POST['description']));
+        $photo_profil = check($_POST['photo_profil']);
+
+    }
 
 
 
@@ -26,7 +31,18 @@ if(isset($_POST['inscription']) && !empty($_POST['inscription'])){
 
 
 ?>
+
+<style>
+    .error { color: red; }
+</style>
+
+
 <div class="inscrip">
+
+<?php if (isset($error)): ?>
+    <p class="error"><?php echo $error; ?></p>
+<?php endif; ?>
+
     <form method="POST" action="index.php" enctype="multipart/form-data">
         Nom d'utilisateur : 
         <input type="text" name="username" placeholder="nom d'utilisateur">
@@ -37,9 +53,7 @@ if(isset($_POST['inscription']) && !empty($_POST['inscription'])){
         Votre mot de passe :
         <input type="password" name="password" placeholder="mot de passe">
         <br>
-        Confirmer mot de passe :
-        <input type="password" name="password_confirm" placeholder="comfirmer le mot de passe">
-        <br>
+        
         Votre téléphone :
         <input type="text" name="tel" placeholder="numero de telephone">
         <br>
@@ -50,7 +64,7 @@ if(isset($_POST['inscription']) && !empty($_POST['inscription'])){
         <input type="text" name="vehicule" placeholder="votre vehicule">
         <br>
         Nombre de places : 
-        <input type="text" name="place" placeholder="nombre de place">
+        <input type="int" name="place" placeholder="nombre de place">
         <br>
         Tarif participation :
         <input type="float" name="tarif" placeholder="paricipation">
