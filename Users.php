@@ -59,6 +59,27 @@ class Users{
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
+    //méthode de connexion 
+    public function login($email,$password){
+        //requetev de selection
+        $query = "SELECT id_user, password FRON users WHERE email = :email";
+        //connexion a la bdd 
+        $dbConnexion = $this->db->getConnexion();
+        //préparer la requete
+        $req = $dbConnexion->prepare($query);
+        //lier les paramettres
+        $req->bindParam(':email',$email);
+        //executer la requete
+        $req->execute();
+        //recuperer le resultat dans un tableau assoc
+        $user = $req->fetch(PDO::FETCH_ASSOC);
+        //vérifier le password 
+        if($user && password_verify($password,$user['password'])){
+            return $user['id_user'];
+        }
+        return false;
+    }
+
 }
 
 
