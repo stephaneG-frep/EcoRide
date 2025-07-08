@@ -48,13 +48,13 @@ h1 {
 .h2{
     display: grid;
     place-items: center;
-    background: -webkit-linear-gradient(rgb(4, 2, 102)0%, rgb(221, 220, 209));
+    background: -webkit-linear-gradient(rgb(3, 2, 87)0%, rgb(86, 180, 235));
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-top: 25px;
     text-decoration-line: underline;
     margin-bottom: 20px;
-    font-size: 42px;
+    font-size: 72px;
 }
 
 
@@ -97,10 +97,10 @@ h1 {
 }
 
 .inscrip{
-    width: 70%;
+    width: 50%;
     height: auto;
     background-color: cornflowerblue;
-    padding: 30px;
+    padding: 20px;
     margin-top: 80px;
 }
 input, label{
@@ -114,8 +114,14 @@ input, label{
     place-items: center;
     width: auto;
     background-color: #920505;
-    color: aliceblue;
-    
+    color: aliceblue;    
+}
+.connect{
+    display: grid;
+    place-items: center;
+    width: 18px;
+    background-color: #4106cc;
+    color: rgb(97, 152, 201);
 }
 footer { 
     display: grid;
