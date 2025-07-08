@@ -119,9 +119,10 @@ input, label{
 .connect{
     display: grid;
     place-items: center;
-    width: 18px;
+    width: 380px;
     background-color: #4106cc;
     color: rgb(97, 152, 201);
+    margin-top: 12px;
 }
 footer { 
     display: grid;

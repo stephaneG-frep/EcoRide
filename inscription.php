@@ -256,7 +256,7 @@ if(isset($_POST['inscription'])){
 
     </form>
 </div>
-<div class="">
+<div class="connect">
      <a href="connexion.php">Déja un compte?Connectez-vous</a>       
 </div>
 
