@@ -1,7 +1,7 @@
 <?php
 
 //inclure le fichier de connexion 
-require_once "./db/Database.php";
+require_once "db/Database.php";
 // class pour gérer les utilisateurs
 class Users{
 
@@ -13,34 +13,25 @@ class Users{
         $this->db = Database::getInstance();
     }
 
-    //methode de vérification d'existance d'email 
-    public function getUserByEmail($email) {
-        $query = 'SELECT id FROM users WHERE email = :email';
-        $dbConnexion = $this->db->getConnexion();
-        $req = $dbConnexion->prepare($query);
-        $req->bindParam(':email', $email);
-        $req->execute();
-        
-        return $req->fetch(PDO::FETCH_ASSOC);
-    }
-
 
     // methode pour enregister en base
-    public function register($username,$email,$password,$tel,$departement,
+    public function register($firstname,$lastname,$email,$password,$tel,$departement,
                              $vehicule,$place,$tarif,$description,$photo_profil){
             //securiser le password avec password_hash
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Requête préparée pour éviter les injections SQL
-            $query = "INSERT INTO users(username,email,password,tel,departement,vehicule
+            $query = "INSERT INTO users(firstname,lastname,email,password,tel,departement,vehicule
                                         ,place,tarif,description,photo_profil) 
-                      VALUES (:username,:email,:password,:tel,:departement,:vehicule,
+                      VALUES (:firstname,:lastname,:email,:password,:tel,:departement,:vehicule,
                               :place,:tarif,:description,:photo_profil)";
             //connexion a la base
             $dbConnexion = $this->db->getConnexion();
             //requette prépaeée
             $req = $dbConnexion->prepare($query);
-            $req->bindParam(':username', $username);
+            //lier les paramettres entre eux(paramettre nommé avec les valeurs récupérées)
+            $req->bindParam(':firstname', $firstname);
+            $req->bindParam(':lastname',$lastname);
             $req->bindParam(':email', $email);
             $req->bindParam(':password', $hashedPassword);
             $req->bindParam(':tel', $tel);
@@ -54,8 +45,18 @@ class Users{
             $req->execute();
             //retourne et vérifie le nombre de ligne inséréees
             return $req->rowCount() > 0;
-            
+                   
+    }
+
+    //methode de vérification d'existance d'email 
+    public function getUserByEmail($email) {
+        $query = 'SELECT id FROM users WHERE email = :email';
+        $dbConnexion = $this->db->getConnexion();
+        $req = $dbConnexion->prepare($query);
+        $req->bindParam(':email', $email);
+        $req->execute();
         
+        return $req->fetch(PDO::FETCH_ASSOC);
     }
 
 }

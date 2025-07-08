@@ -5,25 +5,29 @@ require_once "include/head.php";
 require_once "include/header.php";
 require_once "fonction/check.php";
 require_once "db/config.php";
-require_once "class/Users.php";
+require_once "Users.php";
 
 //recupérer les données du formulaire
 if(isset($_POST['inscription'])){
     //faire toutes les vérifications dez sécuritée   
     //conndition d'appel a la fonction(check) nettoyage securitaire  
-    /*
-    $username = htmlspecialchars(check($_POST['username']));
+
+    $firstname = htmlspecialchars(check($_POST['firstname']));
+    $lastname = htmlspecialchars(check($_POST['lastname']));
     $email = htmlspecialchars(check($_POST['email']));
     $password = htmlspecialchars(check($_POST['password']));
+    $password_confirm = htmlspecialchars(check($_POST['password_confirm']));
     $tel = htmlspecialchars(check($_POST['tel']));
-    $departement = check($_POST['departement']);
+    $departement = htmlspecialchars(check($_POST['departement']));
     $vehicule = htmlspecialchars(check($_POST['vehicule']));
     $place = htmlspecialchars(check($_POST['place']));
     $tarif = htmlspecialchars(check($_POST['tarif']));
     $description = htmlspecialchars(check($_POST['description']));
-    */
-    
-    if(empty($_POST['username']) || !ctype_alnum($_POST['username'])){
+    $photo_profil = htmlspecialchars(check($_POST['photo_profil']));
+
+    if(empty($_POST['firstname']) || !ctype_alpha($_POST['firstname'])){
+        $message = "Saisir un identifient valide";
+    }elseif(empty($_POST['lastname']) || !ctype_alpha($_POST['lastname'])){
         $message = "Saisir un identifient valide";
     }elseif(empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
         $message = "Saisir une adresse mail valide";
@@ -31,17 +35,18 @@ if(isset($_POST['inscription'])){
         $message = " Saisir un mot de passe valide";
     }elseif(empty($_POST['tel']) || !ctype_digit($_POST['tel'])){
         $message = "Saisir un numéro de téléphone valide";
-    }elseif(empty($_POST['departement']) || !ctype_alnum($_POST['departement'])){
+    }elseif(empty($_POST['departement']) || !ctype_alpha($_POST['departement'])){
         $message = "Saisir un département valide";
-    }elseif(empty($_POST['vehicule']) || ctype_alpha($_POST['vehicule'])){
+    }elseif(empty($_POST['vehicule']) || !ctype_alpha($_POST['vehicule'])){
         $message = "Saisir un vehicule valide";
     }elseif(empty($_POST['place']) || !ctype_digit($_POST['place'])){
-        $message = "Saisir un nombre valide";
+        $message = "Saisir un nombre de place valide";
     }elseif(empty($_POST['tarif']) || !ctype_digit($_POST['tarif'])){
         $message = "Saisir un tarif valide";
     }else{
         //valeurs du formulaire a mettre dans la méthode register
-        $username = $_POST['username'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $password_confirm = $_POST['password_confirm'];
@@ -59,7 +64,6 @@ if(isset($_POST['inscription'])){
             if(preg_match("#jpeg|png|jpg#",$_FILES['photo_profil']['type'])){
                 //inclure le fichier token
                 require_once "fonction/token.php";
-
                 //donner un nom aléatoire
                 $photo_profil = $token." ".$_FILES['photo_profil']['name'];
                 //chemin de la photo stocker
@@ -70,11 +74,9 @@ if(isset($_POST['inscription'])){
                 $message = "Choisir le bon format(png,jpg,jpeg)";
             }
         }
-
         //insertion des données
         //instancier un users
         $user = new Users();
-
         //vérifier les doublon d'adressemail avec la methode getUserByEmail de la class users
         $existingUser = $user->getUserByEmail($email);
         //si resultat positif message erreur
@@ -83,7 +85,7 @@ if(isset($_POST['inscription'])){
             //sinon réussite de l'inscription
         }else{
             //appel a la méthode register class users
-            $result = $user->register($username,$email,$password,$tel,
+            $result = $user->register($firstname,$lastname,$email,$password,$tel,
             $departement,$vehicule,$place,$tarif,$description,$photo_profil);
                                     
             if($result){
@@ -99,16 +101,19 @@ if(isset($_POST['inscription'])){
 }
 
 
-
-
 ?>
 <div class="inscrip">
 
-<?php if(isset($message)) echo $message; ?>
+    <h2 class="h2">Inscription</h2>
 
-    <form method="POST" action="index.php" enctype="multipart/form-data">
-        Nom d'utilisateur : 
-        <input type="text" name="username" placeholder="nom d'utilisateur">
+    <?php if(isset($message)) echo "<div class='erreurs'>".$message."</div>"; ?>
+
+    <form method="POST" action="inscription.php" enctype="multipart/form-data">
+        Votre Nom : 
+        <input type="text" name="firstname" placeholder="votre nom">
+        <br>
+        Votre Prénom : 
+        <input type="text" name="lastname" placeholder="votre prénom">
         <br>
         Votre E-mail : 
         <input type="email" name="email" placeholder="email: exemple@exemple.com">
@@ -120,11 +125,34 @@ if(isset($_POST['inscription'])){
         <input type="password" name="password_confirm" placeholder="confirmer le mot de passe">
         <br>
         Votre téléphone :
-        <input type="text" name="tel" placeholder="numero de telephone">
+        <input type="int" name="tel" placeholder="numero de telephone">
         <br>
         Votre département : 
-        <input type="text" name="departement" placeholder="votre département">
+        <select name="departement" id="pet-select">
+            <option  value="">--Please choose an option--</option>
+            <option name="departement" value="Ain">Ain</option>
+            <option name="departement" value="Aisne">Aisne</option>
+            <option name="departement" value="Aisne">Aisne</option>
+            <option name="departement" value="Allier">Allier</option>
+            <option  name="departement"value="Alpes de Haute-Provence">Alpes de Haute-Provence</option>
+            <option  name="departement"value="Hautes-Alpes ">Hautes-Alpes </option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+        </select>
         <br>
+
+
+     <!--   Votre département : 
+        <input type="text" name="departement" placeholder="votre département">
+        <br>-->
         Quelle est votre véhicule : 
         <input type="text" name="vehicule" placeholder="exemple:voiture moto ...">
         <br>
@@ -132,7 +160,7 @@ if(isset($_POST['inscription'])){
         <input type="int" name="place" placeholder="nombre de place">
         <br>
         Tarif participation :
-        <input type="float" name="tarif" placeholder="paricipation">
+        <input type="int" name="tarif" placeholder="paricipation">
         <br>
         Petite déscription :
         <br>

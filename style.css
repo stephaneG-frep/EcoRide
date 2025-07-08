@@ -45,6 +45,17 @@ h1 {
     margin-bottom: 20px;
     font-size: 52px;
 }
+.h2{
+    display: grid;
+    place-items: center;
+    background: -webkit-linear-gradient(rgb(4, 2, 102)0%, rgb(221, 220, 209));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 25px;
+    text-decoration-line: underline;
+    margin-bottom: 20px;
+    font-size: 42px;
+}
 
 
 .item-1 {
@@ -98,7 +109,14 @@ input, label{
     padding: 10px;
     margin: auto;
 }
-
+.erreurs{
+    display: grid;
+    place-items: center;
+    width: auto;
+    background-color: #920505;
+    color: aliceblue;
+    
+}
 footer { 
     display: grid;
     place-items: center;
