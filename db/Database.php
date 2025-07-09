@@ -22,10 +22,10 @@ class Database {
 
     //création d'une methode de classe et public pour instancier la classe database
     public static function getInstance(){
+        //requérire le fichier de config.php
+        require_once "config.php";
         //si il n'y a pas instance
         if(!self::$instance){
-            //requérire le fichier de config.php
-            require_once "config.php";
             //acceeder a l'attribut $instance avec self::
             //création d'une instance de connexion
             self::$instance = new Database(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_NAME);

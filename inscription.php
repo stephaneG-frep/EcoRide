@@ -1,5 +1,4 @@
 <?php
-
 //inclure les fichiers nécessaire
 require_once "include/head.php";
 require_once "include/header.php";
@@ -11,15 +10,15 @@ require_once "Users.php";
 if(isset($_POST['inscription'])){
     //faire toutes les vérifications dez sécuritée   
     //conndition d'appel a la fonction(check) nettoyage securitaire  
-/*
-    $firstname = htmlspecialchars(check($_POST['firstname']));
-    $lastname = htmlspecialchars(check($_POST['lastname']));
-    $email = htmlspecialchars(check($_POST['email']));
-    $password = htmlspecialchars(check($_POST['password']));
-    $password_confirm = htmlspecialchars(check($_POST['password_confirm']));
-    $tel = htmlspecialchars(check($_POST['tel']));
-    $photo_profil = htmlspecialchars(check($_POST['photo_profil']));
-*/
+    /*
+        $firstname = htmlspecialchars(check($_POST['firstname']));
+        $lastname = htmlspecialchars(check($_POST['lastname']));
+        $email = htmlspecialchars(check($_POST['email']));
+        $password = htmlspecialchars(check($_POST['password']));
+        $password_confirm = htmlspecialchars(check($_POST['password_confirm']));
+        $tel = htmlspecialchars(check($_POST['tel']));
+        $photo_profil = htmlspecialchars(check($_POST['photo_profil']));
+    */
     if(empty($_POST['firstname']) || !ctype_alpha($_POST['firstname'])){
         $message = "Saisir un identifient valide";
     }elseif(empty($_POST['lastname']) || !ctype_alpha($_POST['lastname'])){
@@ -72,8 +71,8 @@ if(isset($_POST['inscription'])){
                                         ,$password,$tel,$photo_profil);
                                     
             if($result){
-                header("location: index.php");
-                exit();
+                header("location:index.php");
+                //exit();
             }else{
                 $message = "Erreur lors de l'inscription";
             }
@@ -114,8 +113,9 @@ if(isset($_POST['inscription'])){
         <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
         <input type="file" name="photo_profil" id="photo_profil">
         <br>      
-        Inscription : <input type="submit" name="inscription"
-                       value="Créer un compte" class="btn btn-primary" >
+        Inscription : 
+        <input type="submit" name="inscription"
+                value="Créer un compte" >
         <br>
 
     </form>

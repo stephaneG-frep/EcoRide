@@ -1,8 +1,4 @@
 <?php
-
-use PDO;
-use Database;
-
 //inclure le fichier de connexion 
 require_once "db/Database.php";
 // class pour gérer les utilisateurs
@@ -24,7 +20,7 @@ class Users{
 
             // Requête préparée pour éviter les injections SQL
             $query = "INSERT INTO users(firstname,lastname,email,password,tel,photo_profil) 
-                      VALUES (:firstname,:lastname,:email,:password,:tel,:photo_profil)";
+                      VALUES(:firstname,:lastname,:email,:password,:tel,:photo_profil)";
             //connexion a la base
             $dbConnexion = $this->db->getConnexion();
             //requette prépaeée
@@ -92,7 +88,7 @@ class Users{
     }
 
     //méthode de mise a jour du profil
-    public function update_profil($id_user,$firstname,$lastname,$email,$tel,$photo_profil){
+    public function updateProfil($id_user,$firstname,$lastname,$email,$tel,$photo_profil){
     //requete sql 
     $query = "UPDATE users SET firstname=:firstname,lastname=:lastname,email=:email,tel=:tel,
                                 photo_profil=:photo_profil WHERE id_user=:id_user";
@@ -106,11 +102,30 @@ class Users{
     $req->bindParam(':email', $email);
     $req->bindParam(':tel', $tel);
     $req->bindParam(':photo_profil',$photo_profil);
+    $req->bindParam(':id_user',$id_user);
     //executer la requette
     $req->execute();
      //retourne et vérifie le nombre de ligne inséréees
      return $req->rowCount() > 0;
                                        
+    }
+
+    //méthode de récupération des emails poue changer le profil
+    public function getUserByEmailId($id_user,$email){
+        //requete 
+        $query = "SELECT * FROM users WHERE email = :email AND id_user != :id_user";
+        //connexion 
+        $dbConnexion = $this->db->getConnexion();
+        //preparer la requete
+        $req = $dbConnexion->prepare($query);
+        //lier les parametter
+        $req->bindParam('emai',$email);
+        $req->bindParam('id_user',$id_user);
+        //executer la requete
+        $req->execute();
+        //retourner un tableau associatif
+        return $req->fetch(PDO::FETCH_ASSOC);
+        
     }
 
 }
