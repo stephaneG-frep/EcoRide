@@ -15,3 +15,4 @@
         </nav>
     </div>
 </header>
+<body class="container">

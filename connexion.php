@@ -38,9 +38,4 @@ if(isset($_POST['connexion'])){
 
 
 
-
-
-
-
-
 <?php require_once "include/footer.php";  ?>

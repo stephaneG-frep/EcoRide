@@ -2,6 +2,7 @@
 
 
 ?>
+</body>
 <footer class="footer">
     <ul>
         <li><a href="#">Email:-Nous contacter-</a></li>

@@ -12,7 +12,7 @@ class Database {
         //rty catch pour gérer les erreurs
         try{
             //classe PDO instancier l'objet avec les paramettres du constructeur
-            $this->connexion = new PDO("mysql:host = $host, dbname=$database",$username,$password);
+            $this->connexion = new PDO("mysql:host = $host; dbname=$database",$username,$password);
             //methode setAttribute pour la gestion des erreurs
             $this->connexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         }catch(PDOException $e){
