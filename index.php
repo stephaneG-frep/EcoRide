@@ -14,7 +14,8 @@ require_once "Users.php";
 
         <section class="item-1">
             <div class="item-1a">
-                <img src="<?php echo $id_user['photo_profil']; ?>" alt="photo de profil">
+                <img class="photo_profil" src="img/avatar_default.jpg" alt="photo de profil">
+                
             </div>
             <h4>Nom : <?php echo $user['firstname']; ?> </h4>
             <h4>Prénom : </h4>

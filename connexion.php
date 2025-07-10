@@ -1,12 +1,12 @@
 <?php 
-
-
 require_once "include/head.php";
 require_once "include/header.php";
-require_once 'db/config.php';
+?>
+<?php
+require_once "db/config.php";
 require_once "Users.php";
 
-if(isset($_POST['connexion'])){
+if($_SERVER['REQUEST_METHOD'] === "POST"){
     //récuperer les données du formulaire dans des variables
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -31,10 +31,10 @@ if(isset($_POST['connexion'])){
 
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>">
             Email :
-            <input type="email" name="email" >
+            <input type="email" name="email" required >
             <br>
             Mot de passe :
-            <input type="password" name="password">
+            <input type="password" name="password" required>
             <br>
             Connexion :
             <input type="submit" name="connexion" value="connexion">
