@@ -4,9 +4,50 @@ session_start();
 
 require_once "include/head.php";
 require_once "include/header.php";
+require_once "fonction/check.php";
 require_once "db/config.php";
 require_once "Users.php";
 
+if(isset($_POST['nouvelle_annonce'])){
+
+    $departement = htmlspecialchars(check($_POST['departement']));
+    $vehicule = htmlspecialchars(check($_POST['vehicule']));
+    $place = htmlspecialchars(check($_POST['place']));
+    $tarif = htmlspecialchars(check($_POST['tarif']));
+    $description = htmlspecialchars(check($_POST['description']));
+
+    if(empty($_POST['departement'])){
+        $message = "Choisir un departement";
+    }elseif(empty($_POST['vehicule'])){
+        $message = "Choisir un vehicule";
+    }elseif(empty($_POST['tarif']) || !ctype_digit($_POST['tarif'])){
+        $message = "Choisir des chiffres";
+    }elseif(empty($_POST['description'])){
+        $message = "Ecrir une petite description";
+    }else{
+
+        $departement = $_POST['departement'];
+        $vehicule = $_POST['vehicule'];
+        $place = $_POST['place'];
+        $tarif = $_POST['tarif'];
+        $description = ['description'];
+
+        $annonce = new Annonce();
+        $result = $annonce->newAnnonce($departement,$vehicule,$place
+                                ,$tarif,$description);
+
+        if($result){
+            header("location:index.php");
+            exit();
+        }else{
+            $message = "Erreur lors de l'inscription";
+        }
+
+
+    }
+
+
+}
 
 
 ?>
@@ -123,8 +164,17 @@ require_once "Users.php";
  <!--   Votre département : 
     <input type="text" name="departement" placeholder="votre département">
     <br>-->
-    Quelle est votre véhicule : 
-    <input type="text" name="vehicule" placeholder="exemple:voiture moto ...">
+    Quelle est votre véhicule : <br>
+    <select name="vehicule" id="pet-select">
+        <option  value="">--Quel est voter véhicule--</option>
+        <option name="vehicule" value="Voiture">01:Voiture</option>
+        <option name="vehicule" value="Moto">02:Moto</option>
+        <option name="vehicule" value="SUV">03:SUV</option>
+        <option name="vehicule" value="Camionette">04:Camionette</option>
+        <option name="vehicule" value="Camion">05:Camion</option>
+        <option name="vehicule" value="Camping-car">06:Camping-car</option>
+        <option name="vehicule" value="Mini-Bus">07:Mini-Bus</option>
+    </select>
     <br>
     Nombre de places : 
     <input type="int" name="place" placeholder="nombre de place">
