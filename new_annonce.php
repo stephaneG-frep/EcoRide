@@ -40,7 +40,7 @@ if(isset($_POST['nouvelle_annonce'])){
             header("location:index.php");
             exit();
         }else{
-            $message = "Erreur lors de l'inscription";
+            $message = "Erreur lors du dépot de l'annonce";
         }
 
 

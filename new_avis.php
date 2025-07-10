@@ -8,6 +8,27 @@ require_once "Users.php";
 
 if(isset($_POST['attribuer'])){
 
+    $avis = htmlspecialchars(check($_POST['avis']));
+
+    if(empty($_POST['avis'])){
+        $message = "Ecrire un commentaire";
+    }elseif(empty($_POST['etoile'])){
+        $message = "Attribuer au moins une étoile";
+    }else{
+        $avis = $_POST['avis'];
+        $etoile = $_POST['etoile'];
+
+        $avis = new Avis();
+        $result = $avis->newAvis($avis,$etoile);
+
+        if($result){
+            header("location:index.php");
+            exit();
+        }else{
+            $message = "Erreur lors de l'execution du commentaire";
+        }
+    }
+
 }
 
 ?>
