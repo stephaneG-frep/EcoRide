@@ -2,23 +2,22 @@
 //inclure les fichiers nécessaire
 require_once "include/head.php";
 require_once "include/header.php";
-//require_once "fonction/check.php";
+require_once "fonction/check.php";
 require_once "db/config.php";
 require_once "Users.php";
 
 //recupérer les données du formulaire
 if(isset($_POST['inscription'])){
     //faire toutes les vérifications dez sécuritée   
-    //conndition d'appel a la fonction(check) nettoyage securitaire  
-    /*
-        $firstname = htmlspecialchars(check($_POST['firstname']));
-        $lastname = htmlspecialchars(check($_POST['lastname']));
-        $email = htmlspecialchars(check($_POST['email']));
-        $password = htmlspecialchars(check($_POST['password']));
-        $password_confirm = htmlspecialchars(check($_POST['password_confirm']));
-        $tel = htmlspecialchars(check($_POST['tel']));
-        $photo_profil = htmlspecialchars(check($_POST['photo_profil']));
-    */
+    //conndition d'appel a la fonction(check) nettoyage securitaire      
+    $firstname = htmlspecialchars(check($_POST['firstname']));
+    $lastname = htmlspecialchars(check($_POST['lastname']));
+    $email = htmlspecialchars(check($_POST['email']));
+    $password = htmlspecialchars(check($_POST['password']));
+    $password_confirm = htmlspecialchars(check($_POST['password_confirm']));
+    $tel = htmlspecialchars(check($_POST['tel']));
+    $photo_profil = htmlspecialchars(check($_POST['photo_profil']));
+    
     if(empty($_POST['firstname']) || !ctype_alpha($_POST['firstname'])){
         $message = "Saisir un identifient valide";
     }elseif(empty($_POST['lastname']) || !ctype_alpha($_POST['lastname'])){
