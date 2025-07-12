@@ -1,38 +1,40 @@
 <?php
 
 //inclure les fichiers nécéssaire
+
+require_once "Users.php";
+require_once "db/config.php";
 require_once "include/head.php";
 require_once "include/header.php";
-require_once "db/config.php";
-require_once "Users.php";
+require_once "fonction/check.php";
+require_once "fonction/token.php";
+//require_once "db/config.php";
 
 //si li y a une session
-if(isset($_SESSION['id_user'])){
+if(isset($_SESSION['id'])){
     //instancier l'utilisateur avec son id 
     //avec la méthode getUserById() class Users
-    $id_user = $_SESSION['id_user'];
+    $id = $_SESSION['id'];
     $new_user = new Users();
-    $user = $new_user->getUserById($id_user);
+    $user = $new_user->getUserById($id);
 
     //récupération des données de l'utilisateur dans le formulaire
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         //faire toutes les vérifications de sécu
-        if(empty($_POST['firstname']) || !ctype_alpha($_POST['firstname'])){
+        if(empty($_POST['nom']) || !ctype_alpha($_POST['nom'])){
             $message = "Saisir un identifient valide";
-        }elseif(empty($_POST['lastname']) || !ctype_alpha($_POST['lastname'])){
+        }elseif(empty($_POST['prenom']) || !ctype_alpha($_POST['prenom'])){
             $message = "Saisir un identifient valide";
         }elseif(empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
             $message = "Saisir une adresse mail valide";
-        }elseif(empty($_POST['tel']) || !ctype_digit($_POST['tel'])){
-            $message = "Saisir un numéro de téléphone valide";
+    
         
         }else{
             //valeurs du formulaire a mettre dans la méthode register
-            $firstname = $_POST['firstname'];
-            $lastname = $_POST['lastname'];
-            $email = $_POST['email'];
-            $tel = $_POST['tel'];
-    
+            $nom = htmlspecialchars(check($_POST['nom']));
+            $prenom = htmlspecialchars(check($_POST['prenom']));
+            $email = htmlspecialchars(check($_POST['email']));
+              
             //condition si photo de profil ou non
             if(empty($_FILES['photo_profil']['name'])){
                 $photo_profil = "avatar_default.jpg";
@@ -52,17 +54,16 @@ if(isset($_SESSION['id_user'])){
             }
             //insertion des données
             //instancier un users
-            $user = new Users();
+            //$user = new Users();
             //vérifier les doublon d'adressemail avec la methode getUserByEmail de la class users
-            $existingUser = $user->getUserByEmailId($id_user,$email);
+            $existingUser = $user->getUserByEmailId($id,$email);
             //si resultat positif message erreur
             if($existingUser){ 
                 $message = "L'adresse Email existe déjas";
                 //sinon réussite de l'inscription
             }else{
                 //appel a la méthode register class users
-                $result = $user->updateProfil($id_user,$firstname,$lastname,$email,
-                                             $tel,$photo_profil);
+                $result = $user->updateProfil($id,$nom,$prenom,$email,$photo_profil);
                                         
                 if($result){
                     header("location:index.php");
@@ -87,16 +88,13 @@ if(isset($_SESSION['id_user'])){
 
     <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
         Votre Nom : 
-        <input type="text" name="firstname" value="<?php $user['firstname'] ?> placeholder="votre nom">
+        <input type="text" name="nom" value="<?php $user['nom'] ?> placeholder="votre nom">
         <br>
         Votre Prénom : 
-        <input type="text" name="lastname" value="<?php $user['lastname'] ?> placeholder="votre prénom">
+        <input type="text" name="prenom" value="<?php $user['prenom'] ?> placeholder="votre prénom">
         <br>
         Votre E-mail : 
         <input type="email" name="email" value="<?php $user['email'] ?> placeholder="email: exemple@exemple.com">
-        <br>
-        Votre téléphone :
-        <input type="int" name="tel" value="<?php $user['tel'] ?> placeholder="numero de telephone">
         <br>
         
         Photo de profil : 

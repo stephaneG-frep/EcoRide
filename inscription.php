@@ -1,13 +1,19 @@
 <?php
 //inclure les fichiers nécessaire
+//require_once "session/SessionManager.php";
+require_once "Users.php";
+require_once "db/config.php";
 require_once "include/head.php";
 require_once "include/header.php";
 require_once "fonction/check.php";
-require_once "db/config.php";
-require_once "Users.php";
+require_once "fonction/token.php";
+
 
 //recupérer les données du formulaire
-if(isset($_POST['inscription'])){
+//if(isset($_POST['inscription'])){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user = new Users();
+    /*
     //faire toutes les vérifications dez sécuritée   
     //conndition d'appel a la fonction(check) nettoyage securitaire      
     $firstname = htmlspecialchars(check($_POST['firstname']));
@@ -17,27 +23,33 @@ if(isset($_POST['inscription'])){
     $password_confirm = htmlspecialchars(check($_POST['password_confirm']));
     $tel = htmlspecialchars(check($_POST['tel']));
     $photo_profil = htmlspecialchars(check($_POST['photo_profil']));
-    
-    if(empty($_POST['firstname']) || !ctype_alpha($_POST['firstname'])){
+    */
+    if(empty($_POST['nom']) || !ctype_alpha($_POST['nom'])){
         $message = "Saisir un identifient valide";
-    }elseif(empty($_POST['lastname']) || !ctype_alpha($_POST['lastname'])){
+    }elseif(empty($_POST['prenom']) || !ctype_alpha($_POST['prenom'])){
         $message = "Saisir un identifient valide";
     }elseif(empty($_POST['email']) || !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)){
         $message = "Saisir une adresse mail valide";
-    }elseif(empty($_POST['password']) || $_POST['password'] != $_POST['password_confirm']){
+    }elseif(empty($_POST['password'])){
         $message = " Saisir un mot de passe valide";
-    }elseif(empty($_POST['tel']) || !ctype_digit($_POST['tel'])){
-        $message = "Saisir un numéro de téléphone valide";
     
     }else{
         //valeurs du formulaire a mettre dans la méthode register
+        //faire toutes les vérifications dez sécuritée   
+        //conndition d'appel a la fonction(check) nettoyage securitaire      
+        $nom = htmlspecialchars(check($_POST['nom']));
+        $prenom = htmlspecialchars(check($_POST['prenom']));
+        $email = htmlspecialchars(check($_POST['email']));
+        $password = htmlspecialchars(check($_POST['password']));
+          
+        /*
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $password_confirm = $_POST['password_confirm'];
         $tel = $_POST['tel'];
-
+        */
         //condition si photo de profil ou non
         if(empty($_FILES['photo_profil']['name'])){
             $photo_profil = "avatar_default.jpg";
@@ -54,10 +66,12 @@ if(isset($_POST['inscription'])){
             }else{
                 $message = "Choisir le bon format(png,jpg,jpeg)";
             }
-        }
+        //}
         //insertion des données
         //instancier un users
-        $user = new Users();
+        
+        //$user = new Users();
+        
         //vérifier les doublon d'adressemail avec la methode getUserByEmail de la class users
         $existingUser = $user->getUserByEmail($email);
         //si resultat positif message erreur
@@ -65,17 +79,21 @@ if(isset($_POST['inscription'])){
             $message = "L'adresse Email existe déjas";
             //sinon réussite de l'inscription
         }else{
+    
             //appel a la méthode register class users
-            $result = $user->register($firstname,$lastname,$email
-                                        ,$password,$tel,$photo_profil);
+            $result = $user->register($nom,$prenom,$email
+                                        ,$password,$photo_profil);
                                     
             if($result){
-                header("location:index.php");
+                
+                header('Location:index.php');
                 //exit();
             }else{
                 $message = "Erreur lors de l'inscription";
             }
         }
+
+    }
 
     }
 
@@ -89,12 +107,12 @@ if(isset($_POST['inscription'])){
 
     <?php if(isset($message)) echo "<div class='erreurs'>".$message."</div>"; ?>
 
-    <form method="POST" action="inscription.php" enctype="multipart/form-data">
+    <form method="POST" action="" enctype="multipart/form-data">
         Votre Nom : 
-        <input type="text" name="firstname" id="firstname" placeholder="votre nom">
+        <input type="text" name="nom" id="nom" placeholder="votre nom">
         <br>
         Votre Prénom : 
-        <input type="text" name="lastname" id="lastname" placeholder="votre prénom">
+        <input type="text" name="prenom" id="prenom" placeholder="votre prénom">
         <br>
         Votre E-mail : 
         <input type="email" name="email" id="email" placeholder="email: exemple@exemple.com">
@@ -102,12 +120,7 @@ if(isset($_POST['inscription'])){
         Votre mot de passe :
         <input type="password" name="password" id="password" placeholder="mot de passe">
         <br>
-        Confirmer otre mot de passe :
-        <input type="password" name="password_confirm" id="password_confir" placeholder="confirmer le mot de passe">
-        <br>
-        Votre téléphone :
-        <input type="int" name="tel" placeholder="numero de telephone">
-        <br>
+        
         Photo de profil :
         <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
         <input type="file" name="photo_profil" id="photo_profil">

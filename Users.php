@@ -1,5 +1,6 @@
 <?php
 //inclure le fichier de connexion 
+//require_once "session/SessionManager.php";
 require_once "db/Database.php";
 // class pour gérer les utilisateurs
 class Users{
@@ -14,23 +15,22 @@ class Users{
 
 
     // methode pour enregister en base
-    public function register($firstname,$lastname,$email,$password,$tel,$photo_profil){
+    public function register($nom,$prenom,$email,$password,$photo_profil){
             //securiser le password avec password_hash
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Requête préparée pour éviter les injections SQL
-            $query = "INSERT INTO users(firstname,lastname,email,password,tel,photo_profil) 
-                      VALUES(:firstname,:lastname,:email,:password,:tel,:photo_profil)";
+            $query = "INSERT INTO users(nom,prenom,email,password,photo_profil) 
+                      VALUES(:nom,:prenom,:email,:password,:photo_profil)";
             //connexion a la base
             $dbConnexion = $this->db->getConnexion();
             //requette prépaeée
             $req = $dbConnexion->prepare($query);
             //lier les paramettres entre eux(paramettre nommé avec les valeurs récupérées)
-            $req->bindParam(':firstname', $firstname);
-            $req->bindParam(':lastname',$lastname);
+            $req->bindParam(':nom', $nom);
+            $req->bindParam(':prenom',$prenom);
             $req->bindParam(':email', $email);
             $req->bindParam(':password', $hashedPassword);
-            $req->bindParam(':tel', $tel);
             $req->bindParam(':photo_profil',$photo_profil);
             //executer la requette
             $req->execute();
@@ -53,7 +53,7 @@ class Users{
     //méthode de connexion 
     public function login($email,$password){
         //requetev de selection
-        $query = "SELECT id_user, password FRON users WHERE email = :email";
+        $query = "SELECT id, password FROM users WHERE email = :email";
         //connexion a la bdd 
         $dbConnexion = $this->db->getConnexion();
         //préparer la requete
@@ -66,21 +66,22 @@ class Users{
         $user = $req->fetch(PDO::FETCH_ASSOC);
         //vérifier le password 
         if($user && password_verify($password,$user['password'])){
-            return $user['id_user'];
+            return $user['id'];
+            //return $user['id'];
         }
         return false;
     }
 
     //méthode de récupération de l'id de l'utilisateur
-    public function getUserById($id_user){
+    public function getUserById($id){
         //requete sql 
-        $query = "SELECT * FROM users WHERE id_user = :id_user";
+        $query = "SELECT * FROM users WHERE id = :id";
         //connexion a la base
         $dbConnexion = $this->db->getConnexion();
         //preparer la requete
         $req = $dbConnexion->prepare($query);
         //lier les paramettres
-        $req->bindParam(':id_user',$id_user);
+        $req->bindParam(':id', $id);
         //executer la requete
         $req->execute();
         //recuperer et retourner dans tableau associatif
@@ -88,21 +89,20 @@ class Users{
     }
 
     //méthode de mise a jour du profil
-    public function updateProfil($id_user,$firstname,$lastname,$email,$tel,$photo_profil){
+    public function updateProfil($id,$nom,$prenom,$email,$photo_profil){
     //requete sql 
-    $query = "UPDATE users SET firstname=:firstname,lastname=:lastname,email=:email,tel=:tel,
-                                photo_profil=:photo_profil WHERE id_user=:id_user";
+    $query = "UPDATE users SET nom=:nom,prenom=:prenom,email=:email,
+                                photo_profil=:photo_profil WHERE id=:id";
     //connexiona la BDD
     $dbConnexion = $this->db->getConnexion();
     //requete préparée
     $req = $dbConnexion->prepare($query);
     //lier les paramettres
-    $req->bindParam(':firstname', $firstname);
-    $req->bindParam(':lastname',$lastname);
+    $req->bindParam(':nom', $nom);
+    $req->bindParam(':prenom',$prenom);
     $req->bindParam(':email', $email);
-    $req->bindParam(':tel', $tel);
     $req->bindParam(':photo_profil',$photo_profil);
-    $req->bindParam(':id_user',$id_user);
+    $req->bindParam(':id',$id);
     //executer la requette
     $req->execute();
      //retourne et vérifie le nombre de ligne inséréees
@@ -111,16 +111,16 @@ class Users{
     }
 
     //méthode de récupération des emails poue changer le profil
-    public function getUserByEmailId($id_user,$email){
+    public function getUserByEmailId($id,$email){
         //requete 
-        $query = "SELECT * FROM users WHERE email = :email AND id_user != :id_user";
+        $query = "SELECT * FROM users WHERE email = :email AND id != :id";
         //connexion 
         $dbConnexion = $this->db->getConnexion();
         //preparer la requete
         $req = $dbConnexion->prepare($query);
         //lier les parametter
         $req->bindParam('emai',$email);
-        $req->bindParam('id_user',$id_user);
+        $req->bindParam('id',$id);
         //executer la requete
         $req->execute();
         //retourner un tableau associatif

@@ -1,4 +1,5 @@
 <?php
+require_once "Users.php";
 
 require_once "db/Database.php";
 
