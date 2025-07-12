@@ -33,6 +33,13 @@ nav{
     padding: 10px 15px;
     display: inline-block;
 }
+.deconnect{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: brown;
+    color: aquamarine;
+}
 
 h1 {
     display: grid;
@@ -58,13 +65,15 @@ h1 {
 }
 
 .item-1 {
-    display: grid;
+    display: inline-block;
     background: -webkit-linear-gradient(0deg,#2874A6 0%, #07cc56 100%);
     border-radius: 1280px 420px 600px 0px;
     border: solid #8c10df 4px;
-    place-items: center;
+   
     padding: 25px;
     margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
  }
 .item-1a {
     display: grid;

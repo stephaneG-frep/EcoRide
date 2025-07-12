@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 require_once "Users.php";
 
 ?>
@@ -15,7 +15,7 @@ require_once "Users.php";
                     }else{
                     echo '<li><a href="reprofil.php">Changer le profil</a></li>';
                     echo '<li><a href="parcours.php">Parcours</a></li>';
-                    echo '<li><a href="deconnexion.php">Deconnexion</a></li>';
+                    echo '<li><button class="deconnect"><a href="deconnexion.php">OFF</a></button></li>';
                     } ?>
                     <li><a href="apropos.php">A-propos</a></li>
                 </ul>

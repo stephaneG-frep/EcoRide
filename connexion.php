@@ -17,9 +17,9 @@ if(isset($_POST['connexion'])){
     //instancier la class user
     $user = new Users();
     //appel a la méthode login(class Users)
-    $result = $user->login($email,$password);
-    if($result){
-       
+    $userId = $user->login($email,$password);
+    if($userId){
+        $_SESSION['id'] = $userId;
         header('location: index.php');
         exit();
     }else{

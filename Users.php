@@ -128,6 +128,32 @@ class Users{
         
     }
 
+    public function getAllUsers(){
+        // Définition de la requête SQL pour récupérer les utilisateurs
+            $query = "SELECT * FROM users ORDER BY id DESC";
+    
+        // Obtention de la connexion à la base de données
+            $dbConnexion = $this->db->getConnexion();
+    
+        // Préparation de la requête SQL
+            $req = $dbConnexion->prepare($query);
+    
+        // Exécution de la requête SQL
+            $req->execute();
+    
+        // Initialisation d'un tableau pour stocker les résultats de la requête
+            $resultats = array();
+    
+        // Parcours des résultats de la requête et stockage dans le tableau $resultats
+            while($ligne = $req->fetch(PDO::FETCH_ASSOC)){
+                $resultats[] = $ligne;
+            }
+    
+        // Retour du tableau contenant tous les résultats
+            return $resultats;
+        }
+        
+
 }
 
 

@@ -88,13 +88,13 @@ if(isset($_SESSION['id'])){
 
     <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
         Votre Nom : 
-        <input type="text" name="nom" value="<?php $user['nom'] ?> placeholder="votre nom">
+        <input type="text" name="nom" value="<?= $user['nom'] ?>" placeholder="votre nom">
         <br>
         Votre Prénom : 
-        <input type="text" name="prenom" value="<?php $user['prenom'] ?> placeholder="votre prénom">
+        <input type="text" name="prenom" value="<?= $user['prenom'] ?>" placeholder="votre prénom">
         <br>
         Votre E-mail : 
-        <input type="email" name="email" value="<?php $user['email'] ?> placeholder="email: exemple@exemple.com">
+        <input type="email" name="email" value="<?= $user['email'] ?>" placeholder="email: exemple@exemple.com">
         <br>
         
         Photo de profil : 
