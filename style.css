@@ -34,11 +34,19 @@ nav{
     display: inline-block;
 }
 .deconnect{
-    width: 10px;
-    height: 10px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     background-color: brown;
     color: aquamarine;
+}
+.buttonProfil{
+    width: 100px;
+    height: 100px;
+    background-color: darkolivegreen;
+    color: darksalmon;
+   
+    font-size: small;
 }
 
 h1 {
@@ -68,10 +76,10 @@ h1 {
     display: inline-block;
     background: -webkit-linear-gradient(0deg,#2874A6 0%, #07cc56 100%);
     border-radius: 1280px 420px 600px 0px;
-    border: solid #8c10df 4px;
-   
+    border: solid #8c10df 4px;   
     padding: 25px;
     margin-bottom: 20px;
+    margin-top: 30px;
     margin-left: 10px;
     margin-right: 10px;
  }
@@ -100,12 +108,25 @@ h1 {
     margin-bottom: 20px;
     height: auto;
  }
+ .item-3{
+    margin-top: 80px;
+    display: inline-block;
+    background: -webkit-linear-gradient(0deg,#e94a57 0%, #05b497 100%);
+    border-radius: 1280px 420px 600px 0px;
+    border: solid #cabd07 4px;
+    
+    padding: 5px;
+    margin-bottom: 20px;
+    height: auto;
+ }
 
  p { 
     font-weight: bold;
     width: 80%;
     height: auto;
     margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
     background: -webkit-linear-gradient(#920505, #0f21be);
     background-clip: text;
     -webkit-text-fill-color: transparent;

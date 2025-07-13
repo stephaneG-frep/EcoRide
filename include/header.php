@@ -14,7 +14,7 @@ require_once "Users.php";
                     echo'<li><a href="connexion.php">Se connecter</a></li>';
                     }else{
                     echo '<li><a href="reprofil.php">Changer le profil</a></li>';
-                    echo '<li><a href="parcours.php">Parcours</a></li>';
+                    echo '<li><a href="les_annonces.php">Les annonces</a></li>';
                     echo '<li><button class="deconnect"><a href="deconnexion.php">OFF</a></button></li>';
                     } ?>
                     <li><a href="apropos.php">A-propos</a></li>

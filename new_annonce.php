@@ -1,12 +1,32 @@
 <?php
+error_reporting(-1);
+ini_set("display_errors", 1);
 //ouvrir la session
-session_start();
-require_once "Users.php";
 
+require_once "Users.php";
+require_once "Annonce.php";
 require_once "include/head.php";
 require_once "include/header.php";
 require_once "fonction/check.php";
 
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+    $new_user = new Users();
+    $user = $new_user->getUserById($id);
+
+
+    //$id = $id['id'];
+    $nom = $user['nom'];
+    $prenom = $user['prenom'];
+    $email = $user['email'];
+    $image = $user['photo_profil']; 
+    //$annonce = $user['annonce'];
+
+}else{
+    
+    header('Location: connexion.php');
+    exit();
+}
 
 if(isset($_POST['nouvelle_annonce'])){
 
@@ -34,7 +54,7 @@ if(isset($_POST['nouvelle_annonce'])){
 
         $annonce = new Annonce();
         $result = $annonce->newAnnonce($departement,$vehicule,$place
-                                ,$tarif,$description);
+                                ,$tarif,$description,$id,$id_annonce);
 
         if($result){
             header("location:index.php");
@@ -51,13 +71,16 @@ if(isset($_POST['nouvelle_annonce'])){
 
 
 ?>
+<h1>Bienvenue, <?php echo $user['prenom']." ". $user['nom']; ?>!</h1>    
+<p>Email: <?php echo $user['email']; ?></p>
+
 <div class="inscrip">
 
 <h2 class="h2">Nouvelle annonce</h2>
 
 <?php if(isset($message)) echo "<div class='erreurs'>".$message."</div>"; ?>
 
-<form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
+<form method="POST" action="" enctype="multipart/form-data">
     
     Votre département :<br> 
     <select name="departement" id="pet-select">
@@ -184,7 +207,7 @@ if(isset($_POST['nouvelle_annonce'])){
     <br>
     Petite déscription :
     <br>
-    <textarea name="description" cols="40px" rows="10px" placeholder="petite description"></textarea>       
+    <textarea type="text" name="description" cols="40px" rows="10px" placeholder="petite description"></textarea>       
     <br>
     
     Inscription : <input type="submit" name="nouvelle_annonce"

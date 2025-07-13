@@ -1,4 +1,6 @@
 <?php
+error_reporting(-1);
+ini_set("display_errors", 1);
 
 //inclure les fichiers nécéssaire
 
@@ -18,8 +20,10 @@ if(isset($_SESSION['id'])){
     $new_user = new Users();
     $user = $new_user->getUserById($id);
 
+    
+
     //récupération des données de l'utilisateur dans le formulaire
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(isset($_POST['update_profil'])){
         //faire toutes les vérifications de sécu
         if(empty($_POST['nom']) || !ctype_alpha($_POST['nom'])){
             $message = "Saisir un identifient valide";
@@ -45,7 +49,7 @@ if(isset($_SESSION['id'])){
                     //donner un nom aléatoire
                     $photo_profil = $token." ".$_FILES['photo_profil']['name'];
                     //chemin de la photo stocker
-                    $path = "img/photo_profil/";
+                    $path = "img/";
                     move_uploaded_file($_FILES['photo_profil']['tmp_name'],$path.$photo_profil);
     
                 }else{
@@ -54,7 +58,7 @@ if(isset($_SESSION['id'])){
             }
             //insertion des données
             //instancier un users
-            //$user = new Users();
+            $user = new Users();
             //vérifier les doublon d'adressemail avec la methode getUserByEmail de la class users
             $existingUser = $user->getUserByEmailId($id,$email);
             //si resultat positif message erreur
@@ -68,10 +72,10 @@ if(isset($_SESSION['id'])){
                 if($result){
                     header("location:index.php");
                     //exit();
-                }else{
-                    $message = "Erreur lors de l'inscription";
-                }
+            }else{
+                $message = "Erreur lors de l'inscription";
             }
+          }
     
         }
     }
@@ -86,7 +90,7 @@ if(isset($_SESSION['id'])){
 
     <?php if(isset($message)) echo "<div class='erreurs'>".$message."</div>"; ?>
 
-    <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data">
+    <form method="POST" action="" enctype="multipart/form-data">
         Votre Nom : 
         <input type="text" name="nom" value="<?= $user['nom'] ?>" placeholder="votre nom">
         <br>
@@ -108,9 +112,11 @@ if(isset($_SESSION['id'])){
     </form>
 </div>
 
-<?php }else{
+<?php 
+}else{
     header("location:connexion.php");
-} ?>
+} 
+?>
 
 
 <?php require_once "include/footer.php";  ?>

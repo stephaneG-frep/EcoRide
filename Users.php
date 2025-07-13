@@ -119,7 +119,7 @@ class Users{
         //preparer la requete
         $req = $dbConnexion->prepare($query);
         //lier les parametter
-        $req->bindParam('emai',$email);
+        $req->bindParam('email',$email);
         $req->bindParam('id',$id);
         //executer la requete
         $req->execute();
@@ -151,6 +151,21 @@ class Users{
     
         // Retour du tableau contenant tous les résultats
             return $resultats;
+        }
+
+        public function deleteUser($id){
+            //requete sql
+            $query = "DELETE FROM users WHERE id = :id";
+            //connexion 
+            $dbConnexion = $this->db->getConnexion();
+            //preparation
+            $req = $dbConnexion->prepare($query);
+            //lier les parametters
+            $req->bindParam(':id',$id);
+            //executer
+            $req->execute();
+            //retourner le nombres de lignes
+            return $req->rowCount() > 0;
         }
         
 

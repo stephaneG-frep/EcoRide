@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 //inclure le fichier token
                 require_once "fonction/token.php";
                 //donner un nom aléatoire
-                $photo_profil = $token." ".$_FILES['photo_profil']['name'];
+                $photo_profil = $token."_".$_FILES['photo_profil']['name'];
                 //chemin de la photo stocker
                 $path = "img/photo_profil/";
                 move_uploaded_file($_FILES['photo_profil']['tmp_name'],$path.$photo_profil);
