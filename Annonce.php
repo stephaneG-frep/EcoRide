@@ -116,8 +116,27 @@ class Annonce{
         // Retour du tableau contenant tous les résultats
             return $resultats;
         }
-        
 
+        public function getAnnonceByDepartement($departement){
+           
+            $query = "SELECT a.id_annonce, a.departement, a.vehicule, a.place, a.tarif, a.description,
+                        u.nom, u.prenom, u.photo_profil FROM annonce a
+                       JOIN users u ON a.id = u.id WHERE a.departement LIKE :departement
+                       ORDER BY a.id_annonce DESC";
+            
+            $dbConnexion = $this->db->getConnexion();
+            $req = $dbConnexion->prepare($query);
+            $req->bindValue(':departement', '%'.$departement.'%', PDO::PARAM_STR);
+            $req->execute();
+            $resultats = array();
+            while($ligne = $req->fetch(PDO::FETCH_ASSOC)){
+                $resultats[] = $ligne;
+            }
+
+            return $resultats;
+            
+        }
+         
 
     
     

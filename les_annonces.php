@@ -28,13 +28,10 @@ $annonces = $annonce->getAllAnnonces();
       
         echo '
 
-        <div class="annonce">';   
-        
+        <div class="annonce">';          
 
         foreach($annonces as $annonce){
-            
-           
-            
+             
             echo'
          <section class="item-3">
             <div class="item-1a">

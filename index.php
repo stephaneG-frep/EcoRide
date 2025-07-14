@@ -5,67 +5,82 @@ ini_set("display_errors", 1);
 //inclure les fichiers nécessaire
 
 require_once "Users.php";
+require_once "Annonce.php";
 require_once "db/config.php";
 require_once "include/head.php";
 require_once "include/header.php";
 
-// Instanciation du gestionnaire de productions
-$allUsers = new Users();
-$users = $allUsers->getAllUsers();
+$annonceModel = new Annonce();
+$searchTerm = '';
+$annonces = [];
 
 ?>
-
-        <?php if(isset($message)) echo "<p>".$message."</p>";?>
    
-        <h1>Bienvenue sur EcoRide <br> le site du covoiturage écolo</h1>
+    <h1>Bienvenue sur EcoRide <br> le site du covoiturage écolo</h1>
 
-    <?php 
-    if(isset($_SESSION['id'])){
-       
-    echo '
-
-    <div class="">';
-
-       
-        foreach ($users as $user) {   
-            // Instanciation du gestionnaire d'utilisateurs pour obtenir son nom prenom et autre   
-            $nom = $user['nom'];
-            $prenom = $user['prenom'];
-            $email = $user['email'];
-            $image = $user['photo_profil']; 
-           
-            
-            echo'
-         <section class="item-1">
-            <div class="item-1a">
-                <img class="photo_profil" src="img/photo_profil/'.$image.'" alt="photo de profil">   
-            </div>
-            <h4>Nom : '.$nom.'</h4>
-            <h4>Prénom : '.$prenom.'</h4>
-            <h4>Email : '.$email.'</h4> 
-            <br>
-            <div class="">
-                <button class="buttonProfil"><a href="profil.php">Profil</a></button>
-            </div>  
-
-    
-        </section>
-      ';
+<?php 
+     // Traitement de la recherche
+if (isset($_GET['departement'])) {
+    $searchTerm = trim($_GET['departement']);
+    if (!empty($searchTerm)) {
+        $annonces = $annonceModel->getAnnonceByDepartement($searchTerm);
     }
-    echo '
-    </div>
-        <br><br>
-       
-        <h2 class="h2">Ils donne leurs avis</h2>   
-        <article class="item-2">                     
-                <h4>Nom : '.$nom.'</h4>
-                <h4>Prénom : '.$prenom.'</h4>
-                <p>Avis : lorem 20 lorem morem ipsum tralalal hitout uhgu bjb dfgh xcv  </p>
-        </article>
-        '
-        ;
-    }else{
+}
+?>
 
-    }?>
+
+ <div class="container">
+ <h1>Rechercher des annonces Ecoride</h1>
+    <form method="GET" class="search-form">
+        <input type="text" name="departement" placeholder="Entrez un de département (ex:Aisne,Val D'oise,...)" 
+        // Traitement de la recherche
+        if (isset($_GET['departement'])) {
+            $searchTerm = trim($_GET['departement']);
+            if (!empty($searchTerm)) {
+                $annonces = $annonceModel->searchByDepartement($searchTerm);
+            }
+        }
+      value="<?= htmlspecialchars($searchTerm) ?>">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <?php if (!empty($searchTerm)): ?>
+                <div class="search-info">
+                    <?php if (!empty($annonces)): ?>
+                        <p>Résultats pour le département : "<?= htmlspecialchars($searchTerm) ?>"</p>
+                    <?php else: ?>
+                        <p>Aucun résultat trouvé pour le département : "<?= htmlspecialchars($searchTerm) ?>"</p>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+            
+            <?php if (!empty($annonces)): ?>
+                <div class="annonces-list">
+                    <?php foreach ($annonces as $annonce): ?>
+                        <div class="annonce-card">
+                            <div class="annonce-header">
+                                <img src="<?= htmlspecialchars($annonce['photo_profil'] ?? 'default_profile.jpg') ?>" alt="Photo de profil" class="user-photo">
+                                <div class="user-info">
+                                    <h3><?= htmlspecialchars($annonce['prenom'] . ' ' . $annonce['nom']) ?></h3>
+                                </div>
+                            </div>
+                            
+                            <div class="annonce-details">
+                                <span class="departement"><?= htmlspecialchars($annonce['departement']) ?></span>
+                                <h2><?= htmlspecialchars($annonce['vehicule']) ?></h2>
+                                <p class="tarif"><?= htmlspecialchars($annonce['tarif']) ?> €</p>
+                                <p><strong>Places disponibles:</strong> <?= htmlspecialchars($annonce['place']) ?></p>
+                                <p class="description"><?= nl2br(htmlspecialchars($annonce['description'])) ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php elseif (empty($searchTerm)): ?>
+                <div class="no-results">
+                    <p>Entrez un numéro de département pour afficher les annonces correspondantes</p>
+                </div>
+            <?php endif; ?>
+</div>
+
 
 <?php require_once "include/footer.php"; ?>
