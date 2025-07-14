@@ -10,47 +10,43 @@ require_once "db/config.php";
 require_once "include/head.php";
 require_once "include/header.php";
 
-/*
-//vérifier la session
-if(isset($_SESSION['id'])){
-    $id = $_SESSION['id'];
-    
-}else{
-    header("location: connexion.php");
-    exit();
-}
-*/
+
 //instancier la methode getAllAnnonces
 $annonce = new Annonce();
 $annonces = $annonce->getAllAnnonces();
 // Instanciation du gestionnaire  des utilisateurs
 
-      
+     
         echo '
-
-        <div class="annonce">';          
+    <div class=container">
+        <div class="annonces-list">';          
 
         foreach($annonces as $annonce){
              
-            echo'
-         <section class="item-3">
-            <div class="item-1a">
+        echo'
+        <div class="annonce-card">        
+            <div class="annonce-header">
                 <img class="photo_profil" src="img/photo_profil/'.$annonce['photo_profil'].'" alt="photo de profil">   
+                <div class="user-info">
+                    <h2>annonce postée par :'.$annonce['nom'].' '.$annonce['prenom'].' --- '.$annonce['email'].'</h2>
+                </div>
             </div>
-            <h2>annonce postée par :'.$annonce['nom'].' '.$annonce['prenom'].' --- '.$annonce['email'].'</h2>
-            <h4>Annonces : </h4>
-            <p>departement : '.$annonce['departement'].'</p>
-            <p>vehicule : '.$annonce['vehicule'].'</p>
-            <p>nombres de places : '.$annonce['place'].'</p>
-            <p>tarif de participation : '.$annonce['tarif'].'</p>
-            <p>une description du voyage : '.$annonce['description'].'</p> 
-            <br>
+            <div class="annonce-detail">
+                <h4>Annonces : </h4>
+                <span class="departement">departement : '.$annonce['departement'].'</span>
+                <h2>vehicule : '.$annonce['vehicule'].'</h2>
+                <p><strong>nombres de places : '.$annonce['place'].'</strong></p>
+                <p class="tarif">tarif de participation : '.$annonce['tarif'].'</p>
+                <p class="description">une description du voyage : '.$annonce['description'].'</p> 
+                <br>
+            </div>
             <div class="">
                 <button class="buttonProfil"><a href="profil.php">Profil</a></button>
-            </div>  
+            </div>
+        </div>  
         ';
-    echo '
-        </section>
+        echo '
+        </div>
     </div>
       ';
     
@@ -59,7 +55,7 @@ $annonces = $annonce->getAllAnnonces();
 
 <p><a href="deconnexion.php">Déconnexion</a></p>
     <br><br>
-    <p><a href="new_annonce.php">Poster une annonce</a></p>
+<p><a href="new_annonce.php">Poster une annonce</a></p>
 
 
 

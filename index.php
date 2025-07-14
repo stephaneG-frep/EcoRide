@@ -14,11 +14,15 @@ $annonceModel = new Annonce();
 $searchTerm = '';
 $annonces = [];
 
+
 ?>
    
     <h1>Bienvenue sur EcoRide <br> le site du covoiturage écolo</h1>
 
 <?php 
+
+
+
      // Traitement de la recherche
 if (isset($_GET['departement'])) {
     $searchTerm = trim($_GET['departement']);
@@ -26,16 +30,17 @@ if (isset($_GET['departement'])) {
         $annonces = $annonceModel->getAnnonceByDepartement($searchTerm);
     }
 }
+if(isset($_SESSION['id'])){
 ?>
 
 
  <div class="container">
  <h1>Rechercher des annonces Ecoride</h1>
     <form method="GET" class="search-form">
-        <input type="text" name="departement" placeholder="Entrez un de département (ex:Aisne,Val D'oise,...)" 
+        <input type="text" name="departement" placeholder="Entrez un de département (ex:Aisne,Val D\'oise,...)" 
         // Traitement de la recherche
-        if (isset($_GET['departement'])) {
-            $searchTerm = trim($_GET['departement']);
+        if (isset($_GET["departement"])) {
+            $searchTerm = trim($_GET["departement"]);
             if (!empty($searchTerm)) {
                 $annonces = $annonceModel->searchByDepartement($searchTerm);
             }
@@ -81,6 +86,9 @@ if (isset($_GET['departement'])) {
                 </div>
             <?php endif; ?>
 </div>
+<?php
+}else{
 
+}?>
 
 <?php require_once "include/footer.php"; ?>
