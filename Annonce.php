@@ -88,8 +88,19 @@ class Annonce{
     
         //récuperer les toutes annonces 
         public function getAllAnnonces(){
+            /*
         // Définition de la requête SQL pour récupérer les annonces d'un utilisateur spécifique
-            $query = "SELECT * FROM annonce ORDER BY id_annonce DESC";   
+            $query = "SELECT a.id_annonce,a.departement,a.vehicule,a.place,a.tarif,a.description
+                     a.id as user_id,u.nom,u.prenom,u.email,u.password,u.photo_profil FROM annonce a
+                     JOIN users u ON a.id = u.id ";   
+
+            */
+            // Requête pour récupérer toutes les annonces avec les infos des utilisateurs
+            $query = "SELECT a.id_annonce, a.departement, a.vehicule, a.place, a.tarif, a.description,
+                     a.id as user_id, u.nom,u.prenom,u.email,u.photo_profil FROM annonce a
+                     JOIN users u ON a.id = u.id ORDER BY a.id_annonce DESC";
+
+
         // Obtention de la connexion à la base de données
             $dbConnexion = $this->db->getConnexion();    
         // Préparation de la requête SQL

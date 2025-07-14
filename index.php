@@ -11,8 +11,6 @@ require_once "include/header.php";
 
 // Instanciation du gestionnaire de productions
 $allUsers = new Users();
-
-// Récupération des productions de l'artiste
 $users = $allUsers->getAllUsers();
 
 ?>
@@ -47,7 +45,7 @@ $users = $allUsers->getAllUsers();
             <h4>Email : '.$email.'</h4> 
             <br>
             <div class="">
-                <button class="buttonProfil"><a href="profil.php">Voir le profil</a></button>
+                <button class="buttonProfil"><a href="profil.php">Profil</a></button>
             </div>  
 
     

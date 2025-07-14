@@ -6,12 +6,17 @@
 
 body{
     display: grid;
-    justify-content: center;
     place-items: center;
-    background-color: darkolivegreen;
-    color: cornsilk;
     margin: auto;
+    background-color: darkolivegreen;
+    color: rgb(240, 180, 106);
     text-align: center;
+    align-items: center;
+}
+
+header{
+    background-color: #222121;
+    width: 100%;
 }
 nav{
     float: right;
@@ -41,12 +46,11 @@ nav{
     color: aquamarine;
 }
 .buttonProfil{
-    width: 100px;
-    height: 100px;
-    background-color: darkolivegreen;
-    color: darksalmon;
-   
-    font-size: small;
+    width: auto;
+    height: 50px;
+    color: rgb(196, 153, 139);
+    background-color: rgb(22, 32, 5);
+    font-size: xx-small;
 }
 
 h1 {
@@ -66,6 +70,7 @@ h1 {
     background: -webkit-linear-gradient(rgb(3, 2, 87)0%, rgb(86, 180, 235));
     background-clip: text;
     -webkit-text-fill-color: transparent;
+
     margin-top: 25px;
     text-decoration-line: underline;
     margin-bottom: 20px;
@@ -74,6 +79,7 @@ h1 {
 
 .item-1 {
     display: inline-block;
+    color: #060f83;
     background: -webkit-linear-gradient(0deg,#2874A6 0%, #07cc56 100%);
     border-radius: 1280px 420px 600px 0px;
     border: solid #8c10df 4px;   
@@ -109,15 +115,21 @@ h1 {
     height: auto;
  }
  .item-3{
-    margin-top: 80px;
     display: inline-block;
-    background: -webkit-linear-gradient(0deg,#e94a57 0%, #05b497 100%);
-    border-radius: 1280px 420px 600px 0px;
+    color: #100318;
+    background: -webkit-linear-gradient(0deg,#222121 0%, #e1e2e2 100%);
     border: solid #cabd07 4px;
-    
     padding: 5px;
     margin-bottom: 20px;
-    height: auto;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 90%;
+ }
+ .annonce{
+    display: inline-block;
+    margin: auto;
+    padding: 15px;
  }
 
  p { 
@@ -134,11 +146,11 @@ h1 {
  }
 
 #logo{
-    float: left;
-    font-size: 70px;
+    float: inline-start;
+    font-size: 30px;
     font-weight: bolder;
-    margin-left: 10px;
-    padding: 15px;
+    padding: 30px;
+    margin-right: 150px;
 }
 
 .inscrip{
@@ -170,11 +182,11 @@ input, label{
     margin-top: 12px;
 }
 footer { 
-    display: grid;
-    place-items: center;
+    display: inline-block;
+    
     width: 100%;
     background-color: rgb(71, 77, 62); 
-    color: darkorange; 
+    color: darkgoldenrod; 
     border: 4px solid #063f06;
     margin-top: 100px;  
     margin-bottom: 10px;

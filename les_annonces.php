@@ -10,67 +10,53 @@ require_once "db/config.php";
 require_once "include/head.php";
 require_once "include/header.php";
 
+/*
+//vérifier la session
+if(isset($_SESSION['id'])){
+    $id = $_SESSION['id'];
+    
+}else{
+    header("location: connexion.php");
+    exit();
+}
+*/
+//instancier la methode getAllAnnonces
+$annonce = new Annonce();
+$annonces = $annonce->getAllAnnonces();
 // Instanciation du gestionnaire  des utilisateurs
-$allUsers = new Users();
-// Récupération des utilisateurs 
-$users = $allUsers->getAllUsers();
 
-$allAnnonce = new Annonce();
-$annonces = $allAnnonce->getAllAnnonces();
+      
+        echo '
 
-
-?>
-
-        <?php if(isset($message)) echo "<p>".$message."</p>";?>
-   
-        <h1>Bienvenue sur EcoRide <br> le site du covoiturage écolo</h1>
-
-    <?php 
-    if(isset($_SESSION['id'])){
-       
-    echo '
-
-    <div class="">';   
-        foreach ($users as $user) {   
-            // Instanciation du gestionnaire d'utilisateurs pour obtenir son nom prenom et autre   
-            $nom = $user['nom'];
-            $prenom = $user['prenom'];
-            $email = $user['email'];
-            $image = $user['photo_profil']; 
-
-        foreach ($annonces as $annonce){
-            $departement = $annonce['departement'];
-            $vehicule = $annonce['vehicule'];
-            $place = $annonce['place'];
-            $tarif = $annonce['tarif'];
-            $description = $annonce['description'];
+        <div class="annonce">';   
         
+
+        foreach($annonces as $annonce){
+            
            
             
             echo'
          <section class="item-3">
             <div class="item-1a">
-                <img class="photo_profil" src="img/photo_profil/'.$image.'" alt="photo de profil">   
+                <img class="photo_profil" src="img/photo_profil/'.$annonce['photo_profil'].'" alt="photo de profil">   
             </div>
-            <h4>annonce postée par : '.$nom.' '.$prenom.' '.$email.'</h4>
+            <h2>annonce postée par :'.$annonce['nom'].' '.$annonce['prenom'].' --- '.$annonce['email'].'</h2>
             <h4>Annonces : </h4>
-            <p>departement : '.$departement.'</p>
-            <p>vehicule : '.$vehicule.'</p>
-            <p>nombres de places : '.$place.'</p>
-            <p>tarif de participation : '.$tarif.'</p>
-            <p>une description du voyage : '.$description.'</p> 
+            <p>departement : '.$annonce['departement'].'</p>
+            <p>vehicule : '.$annonce['vehicule'].'</p>
+            <p>nombres de places : '.$annonce['place'].'</p>
+            <p>tarif de participation : '.$annonce['tarif'].'</p>
+            <p>une description du voyage : '.$annonce['description'].'</p> 
             <br>
             <div class="">
-                <button class="buttonProfil"><a href="profil.php">Voir le profil</a></button>
+                <button class="buttonProfil"><a href="profil.php">Profil</a></button>
             </div>  
-
-    
+        ';
+    echo '
         </section>
+    </div>
       ';
-    }
-}
     
-    }else{
 
     }?>
 
@@ -82,4 +68,3 @@ $annonces = $allAnnonce->getAllAnnonces();
 
 <?php require_once "include/footer.php"; ?>
 
-?>

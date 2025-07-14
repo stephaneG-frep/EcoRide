@@ -36,9 +36,8 @@ if (isset($_SESSION['id'])) {
 <?php
 echo '
 <br><br>
-<div class="">';   
+<div class=""> 
         
-        echo'
      <section class="item-1">
         <div class="item-1a">
             <img class="photo_profil" src="img/photo_profil/'.$image.'" alt="photo de profil">   
@@ -53,24 +52,19 @@ echo '
                 <h4>Nom : '.$nom.'</h4>
                 <h4>Prénom : '.$prenom.'</h4>
                 <p>Avis : lorem 20 lorem morem ipsum tralalal hitout uhgu bjb dfgh xcv  </p>
+         
     </article>
 
+    <div class="item-3">
+        <h4 class="item-3a">Vos annonces</h4>   
+    </div>   
+        <p><a href="deconnexion.php">Déconnexion</a></p>
+        <br><br>
+        <p><a href="new_annonce.php">Poster une annonce</a></p>
+</div>
   ';
+ 
 ?>
-<div class="item-3">
-    <h4 class="item-3a">Vos annonces</h4>   
-
-</div>   
-    <p><a href="deconnexion.php">Déconnexion</a></p>
-    <br><br>
-    <p><a href="new_annonce.php">Poster une annonce</a></p>
-
-
-
-
-
-
-
-
+ 
 
 <?php require_once "include/footer.php"; ?>
