@@ -15,14 +15,13 @@ require_once "include/header.php";
 $annonce = new Annonce();
 $annonces = $annonce->getAllAnnonces();
 // Instanciation du gestionnaire  des utilisateurs
-
-     
+?>
+<?php
+ /*   
         echo '
     <div class=container">
         <div class="annonces-list">';          
-
-        foreach($annonces as $annonce){
-             
+        foreach($annonces as $annonce){            
         echo'
         <div class="annonce-card">        
             <div class="annonce-header">
@@ -56,8 +55,34 @@ $annonces = $annonce->getAllAnnonces();
 <p><a href="deconnexion.php">Déconnexion</a></p>
     <br><br>
 <p><a href="new_annonce.php">Poster une annonce</a></p>
+<?php require_once "include/footer.php"; ?>
+*/
+?>
 
+<div class="container">
 
+                <div class="annonces-list">
+                    <?php foreach ($annonces as $annonce): ?>
+                        <div class="annonce-card">
+                            <div class="annonce-header">
+                                <img src="<?= htmlspecialchars($annonce['photo_profil'] ?? 'default_profile.jpg') ?>" alt="Photo de profil" class="user-photo">
+                                <div class="user-info">
+                                    <h3><?= htmlspecialchars($annonce['prenom'] . ' ' . $annonce['nom']) ?></h3>
+                                    <h3><?=$annonce['email']?></h3>
+                                </div>
+                            </div>
+                            
+                            <div class="annonce-details">
+                                <span class="departement"><?= htmlspecialchars($annonce['departement']) ?></span>
+                                <h2><?= htmlspecialchars($annonce['vehicule']) ?></h2>
+                                <p class="tarif"><?= htmlspecialchars($annonce['tarif']) ?> €</p>
+                                <p><strong>Places disponibles:</strong> <?= htmlspecialchars($annonce['place']) ?></p>
+                                <p class="description"><?= nl2br(htmlspecialchars($annonce['description'])) ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+</div>
 
 <?php require_once "include/footer.php"; ?>
 

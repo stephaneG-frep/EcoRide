@@ -120,7 +120,7 @@ class Annonce{
         public function getAnnonceByDepartement($departement){
            
             $query = "SELECT a.id_annonce, a.departement, a.vehicule, a.place, a.tarif, a.description,
-                        u.nom, u.prenom, u.photo_profil FROM annonce a
+                        u.nom, u.prenom, u.email, u.photo_profil FROM annonce a
                        JOIN users u ON a.id = u.id WHERE a.departement LIKE :departement
                        ORDER BY a.id_annonce DESC";
             

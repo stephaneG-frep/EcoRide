@@ -67,6 +67,7 @@ if(isset($_SESSION['id'])){
                                 <img src="<?= htmlspecialchars($annonce['photo_profil'] ?? 'default_profile.jpg') ?>" alt="Photo de profil" class="user-photo">
                                 <div class="user-info">
                                     <h3><?= htmlspecialchars($annonce['prenom'] . ' ' . $annonce['nom']) ?></h3>
+                                    <h3><?=htmlspecialchars($annonce['email'])?></h3>
                                 </div>
                             </div>
                             

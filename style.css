@@ -194,7 +194,6 @@ footer {
 
 
 .container {
-   
     margin: 0 auto;
 }
 
@@ -233,7 +232,8 @@ h1 {
 }
 .annonces-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: 80px,80px,80px;
+    
     gap: 20px;
 }
 .annonce-card {

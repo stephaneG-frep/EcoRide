@@ -43,17 +43,17 @@ if(isset($_SESSION['id'])){
             if(empty($_FILES['photo_profil']['name'])){
                 $photo_profil = "avatar_default.jpg";
             }else{
-                if(preg_match("#jpeg|png|jpg#",$_FILES['photo_profil']['type'])){
+                if(preg_match("#gif|jpeg|png|jpg#",$_FILES['photo_profil']['type'])){
                     //inclure le fichier token
                     require_once "fonction/token.php";
                     //donner un nom aléatoire
-                    $photo_profil = $token." ".$_FILES['photo_profil']['name'];
+                    $photo_profil = $token."_".$_FILES['photo_profil']['name'];
                     //chemin de la photo stocker
-                    $path = "img/";
+                    $path = "img/photo_profil/";
                     move_uploaded_file($_FILES['photo_profil']['tmp_name'],$path.$photo_profil);
     
                 }else{
-                    $message = "Choisir le bon format(png,jpg,jpeg)";
+                    $message = "Choisir le bon format(gif,png,jpg,jpeg)";
                 }
             }
             //insertion des données
