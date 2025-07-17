@@ -34,7 +34,7 @@ if(isset($_POST['nouvelle_annonce'])){
     $vehicule = htmlspecialchars(check($_POST['vehicule']));
     $place = htmlspecialchars(check($_POST['place']));
     $tarif = htmlspecialchars(check($_POST['tarif']));
-    $description = htmlspecialchars(check($_POST['description']));
+    $description = htmlspecialchars($_POST['description']);
 
     if(empty($_POST['departement'])){
         $message = "Choisir un departement";
@@ -207,7 +207,7 @@ if(isset($_POST['nouvelle_annonce'])){
     <br>
     Petite déscription :
     <br>
-    <textarea type="text" name="description" cols="40px" rows="10px" placeholder="petite description"></textarea>       
+    <textarea type="text" name="description" cols="40px" rows="10px" placeholder="petite description" ></textarea>       
     <br>
     
     Inscription : <input type="submit" name="nouvelle_annonce"

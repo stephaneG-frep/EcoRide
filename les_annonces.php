@@ -15,6 +15,7 @@ require_once "include/header.php";
 $annonce = new Annonce();
 $annonces = $annonce->getAllAnnonces();
 // Instanciation du gestionnaire  des utilisateurs
+
 ?>
 <?php
  /*   
@@ -77,7 +78,7 @@ $annonces = $annonce->getAllAnnonces();
                                 <h2><?= htmlspecialchars($annonce['vehicule']) ?></h2>
                                 <p class="tarif"><?= htmlspecialchars($annonce['tarif']) ?> €</p>
                                 <p><strong>Places disponibles:</strong> <?= htmlspecialchars($annonce['place']) ?></p>
-                                <p class="description"><?= nl2br(htmlspecialchars($annonce['description'])) ?></p>
+                                <p class="description"><?= $annonce['description'];?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>

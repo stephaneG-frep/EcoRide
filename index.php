@@ -5,6 +5,7 @@ ini_set("display_errors", 1);
 //inclure les fichiers nécessaire
 
 require_once "Users.php";
+require_once "Admin.php";
 require_once "Annonce.php";
 require_once "db/config.php";
 require_once "include/head.php";
@@ -76,7 +77,7 @@ if(isset($_SESSION['id'])){
                                 <h2><?= htmlspecialchars($annonce['vehicule']) ?></h2>
                                 <p class="tarif"><?= htmlspecialchars($annonce['tarif']) ?> €</p>
                                 <p><strong>Places disponibles:</strong> <?= htmlspecialchars($annonce['place']) ?></p>
-                                <p class="description"><?= nl2br(htmlspecialchars($annonce['description'])) ?></p>
+                                <p class="description"><?= $annonce['description'] ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>

@@ -1,39 +1,35 @@
 <?php
 
-require_once "./db/Database.php";
+require_once "../db/Database.php";
+require_once "database_admin.php";
+
 
 class Admin {
      //gérer les connexion en base 
     private $db;
-    private $model;
+   
      //constructeur pour inicier la connexion
      public function __construct(){
          //appel a la méethode getInstance
-         $this->db = Database::getInstance();
-         $this->model = new Admin();
-         $this->checkAdmin();
-
-    }
-
-    function getAdminDBConnection() {
-        try {
-            $db = new PDO(
-                'mysql:host=localhost;dbname=ecoride;charset=utf8', 
-                'admin_user',  // Utiliser un utilisateur dédié admin
-                'StrongAdminPassword123',
-                [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-                ]
-            );
-            return $db;
+         try {
+            $this->db = new PDO(
+                "mysql:host=localhost;dbname=ecoride", 'root', '');
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $this->db;
         } catch (PDOException $e) {
-            error_log('Admin DB Error: ' . $e->getMessage());
-            die('Erreur de connexion administrateur');
+            die('Erreur de connexion à la base de données : ' . $e->getMessage());
         }
+        
+ 
+     }
+
+     public function getDBConnection($username){
+     $stmt = $this->db->prepare("SELECT * FROM admin_users WHERE username = ? LIMIT 1");
+     $stmt->bindParam(':username',$username);
+     $stmt->execute([$username]);
+     return $stmt->fetch();
     }
-    
-    
+
     private function checkAdmin() {
         session_start();
         if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
@@ -42,14 +38,6 @@ class Admin {
         }
     }
 
-    public function dashboard() {
-        $page = $_GET['page'] ?? 1;
-        $annonces = $this->model->getAllAnnonces($page);
-        $totalAnnonces = $this->model->countAnnonces();
-        $users = $this->model->getAllUsers();
-        
-        require_once __DIR__.'/../views/layouts/admin.php';
-    }
 
     // Récupère toutes les annonces avec pagination
     public function getAllAnnonces($page = 1, $perPage = 10) {
@@ -59,7 +47,7 @@ class Admin {
                  FROM annonces a
                  JOIN users u ON a.id = u.id
                  LIMIT :offset, :perPage";
-        $dbConnexion = $this->db->getConnexion();
+        $dbConnexion = $this->db;
         $req = $dbConnexion->prepare($query);
         $req->bindValue(':offset', $offset, PDO::PARAM_INT);
         $req->bindValue(':perPage', $perPage, PDO::PARAM_INT);
@@ -71,7 +59,7 @@ class Admin {
     // Compte le nombre total d'annonces
     public function countAnnonces() {
         $query = "SELECT COUNT(*) FROM annonce";
-        $dbConnexion = $this->db->getConnexion();
+        $dbConnexion = $this->db;
         $req = $dbConnexion->prepare($query);
         $req->execute();
         return $req->fetchColumn();
@@ -80,7 +68,7 @@ class Admin {
     // Compteur d'utilisateurs
     public function countUsers() {
         $query = "SELECT COUNT(*) FROM users";
-        $dbConnexion = $this->db->getConnexion();
+        $dbConnexion = $this->db;
         $req = $dbConnexion->prepare($query);
         $req->execute();
         return $req->fetchColumn();
@@ -91,7 +79,7 @@ class Admin {
         // Définition de la requête SQL pour récupérer les utilisateurs
             $query = "SELECT * FROM users ORDER BY id DESC";   
         // Obtention de la connexion à la base de données
-            $dbConnexion = $this->db->getConnexion();    
+            $dbConnexion = $this->db;    
         // Préparation de la requête SQL
             $req = $dbConnexion->prepare($query);    
         // Exécution de la requête SQL
@@ -110,7 +98,7 @@ class Admin {
     //supprimer l'annonce
     public function deleteAnnonce($id_annonce){
         $query = "DELETE FROM annonce WHERE id_annonce =:id_annonce";
-        $req = $this->db->getConnexion()->prepare($query);
+        $req = $this->db->prepare($query);
         $req->bindParam(':id_annonce', $id_annonce);
         $req->execute();
         return $req->rowCount() >0;
@@ -120,7 +108,7 @@ class Admin {
         //requete sql
         $query = "DELETE FROM users WHERE id = :id";
         //connexion 
-        $dbConnexion = $this->db->getConnexion();
+        $dbConnexion = $this->db;
         //preparation
         $req = $dbConnexion->prepare($query);
         //lier les parametters
@@ -130,4 +118,14 @@ class Admin {
         //retourner le nombres de lignes
         return $req->rowCount() > 0;
     }
+/*
+    public function dashboard() {
+        $page = $_GET['page'] ?? 1;
+        $annonces = $this->db->getAllAnnonces($page);
+        $totalAnnonces = $this->db->countAnnonces();
+        $users = $this->db->getAllUsers();
+        
+        require_once 'layout_admin.php';
+    }
+*/
 }

@@ -51,7 +51,7 @@
             
             <!-- Main content -->
             <div class="col-md-10 p-4">
-                <?php include __DIR__.'dashboard_admin.php'; ?>
+                <?php include 'dashboard_admin.php'; ?>
             </div>
         </div>
     </div>

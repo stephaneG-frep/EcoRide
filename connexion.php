@@ -10,7 +10,7 @@ require_once "include/header.php";
 
 
 //SessionManager::startSession();
-if(isset($_POST['connexion'])){
+if(isset($_POST['connexion']) ){
     //récuperer les données du formulaire dans des variables
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -18,8 +18,13 @@ if(isset($_POST['connexion'])){
     $user = new Users();
     //appel a la méthode login(class Users)
     $userId = $user->login($email,$password);
+
     if($userId){
         $_SESSION['id'] = $userId;
+        //$_SESSION['email'] = $userId['email'];
+       
+        
+        
         header('location: index.php');
         exit();
     }else{

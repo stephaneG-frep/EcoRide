@@ -67,9 +67,9 @@ class Users{
         //vérifier le password 
         if($user && password_verify($password,$user['password'])){
             return $user['id'];
-            //return $user['id'];
         }
         return false;
+        
     }
 
     //méthode de récupération de l'id de l'utilisateur

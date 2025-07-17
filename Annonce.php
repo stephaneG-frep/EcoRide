@@ -78,9 +78,10 @@ class Annonce{
         //supprimer l'annonce
         public function deleteAnnonce($id_annonce){
             $query = "DELETE FROM annonce WHERE id_annonce =:id_annonce";
-            $req = $this->db->getConnexion()->prepare($query);
+            $dbConnexion = $this->db->getConnexion();
+            $req = $dbConnexion->prepare($query);
             $req->bindParam(':id_annonce', $id_annonce);
-            $req->execute();
+            $req->execute([$id_annonce]);
     
             return $req->rowCount() >0;
         }

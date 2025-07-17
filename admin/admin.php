@@ -1,18 +1,20 @@
 <?php
 require_once "./db/Database.php";
+require_once "database_admin.php";
 require_once "Admin.php";
 
 
-$db = getAdminDBConnection();
-$controller = new Admin($db);
+//$db = getInstance();
+$admin = new Admin($db);
 
 // Routing simple
+/*
 if (isset($_GET['action']) && $_GET['action'] === 'delete') {
-    $controller->deleteAnnonce();
+    $admin->deleteAnnonce($id_annonce);
 } else {
-    $controller->dashboard();
+    $admin->dashboard();
 }
-
+*/
 // Vérification basique de sécurité (à adapter)
 session_start();
 if (!isset($_SESSION['admin_logged_in'])) {
@@ -22,12 +24,12 @@ if (!isset($_SESSION['admin_logged_in'])) {
 
 // Connexion DB et récupération des données
 
-$model = new Admin();
+$admin = new Admin($db);
 
-$annonces = $model->getAllAnnonces();
-$users = $model->getAllUsers();
-$countAnnonces = $model->countAnnonces();
-$countUsers = $model->countUsers();
+$annonces = $admin->getAllAnnonces();
+$users = $admin->getAllUsers();
+$countAnnonces = $admin->countAnnonces();
+$countUsers = $admin->countUsers();
 
 // Affichage
 require_once "layouts_admin.php";
