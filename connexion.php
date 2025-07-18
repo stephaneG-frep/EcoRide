@@ -19,14 +19,13 @@ if(isset($_POST['connexion']) ){
     //appel a la méthode login(class Users)
     $userId = $user->login($email,$password);
 
+
     if($userId){
         $_SESSION['id'] = $userId;
-        //$_SESSION['email'] = $userId['email'];
-       
-        
-        
+        //$_SESSION['email'] = $userId['email'];   
         header('location: index.php');
         exit();
+        
     }else{
         $message = "Email ou mot-de-passe invalide";
     }

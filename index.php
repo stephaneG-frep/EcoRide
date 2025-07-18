@@ -35,7 +35,7 @@ if(isset($_SESSION['id'])){
 ?>
 
 
- <div class="container">
+ <div class="content">
  <h1>Rechercher des annonces Ecoride</h1>
     <form method="GET" class="search-form">
         <input type="text" name="departement" placeholder="Entrez un de département (ex:Aisne,Val D\'oise,...)" 

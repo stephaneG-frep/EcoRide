@@ -1,15 +1,10 @@
 <?php
-
+require_once "include/head.php";
+require_once "include/header.php"
 
 ?>
 
-<?php if (isset($_SESSION['flash_message'])): ?>
-    <div class="alert alert-success"><?= $_SESSION['flash_message']; unset($_SESSION['flash_message']); ?></div>
-<?php endif; ?>
 
-<?php if (isset($_SESSION['flash_error'])): ?>
-    <div class="alert alert-danger"><?= $_SESSION['flash_error']; unset($_SESSION['flash_error']); ?></div>
-<?php endif; ?>
 
 <h2>Tableau de bord</h2>
 
@@ -93,3 +88,5 @@
         </div>
     </div>
 </div>
+
+<?php require_once "include/footer.php"; ?>

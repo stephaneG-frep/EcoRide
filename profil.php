@@ -2,7 +2,6 @@
 error_reporting(-1);
 ini_set("display_errors", 1);
 
-//require_once "session/SessionManager.php";
 require_once "Users.php";
 require_once "Annonce.php";
 require_once "db/config.php";
@@ -19,6 +18,7 @@ if (isset($_SESSION['id'])) {
     $new_annonce = new Annonce();
     $annonces = $new_annonce->getAnnonceByIdUser($id);
 
+   
     //$id = $id['id'];
     $nom = $user['nom'];
     $prenom = $user['prenom'];
@@ -78,41 +78,12 @@ echo '
                                 <p class="description"><?php echo $annonce['description']; ?></p>
                             </div>
 
-                    <!-- Dans votre liste d'annonces -->
-                            <button class="btn btn-danger btn-sm delete_annonce" 
-                                    data-id="<?= $annonce['id_annonce'] ?>">
-                                <i class="fas fa-trash-alt"></i> Supprimer
+                            <button>
+                                <a href="delete_annonce.php/<?php $annonce['id_annonce'];?>"
+                                    onclick="return confirm('Vous etes sur de vouloir la supprimer ?')">supp
+                                </a>                            
                             </button>
-
-                            <script>
-                            document.querySelectorAll('.delete_annonce').forEach(button => {
-                                button.addEventListener('click', function() {
-                                    const annonceId = this.getAttribute('data-id');
-                                    
-                                    if (confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?')) {
-                                        fetch('delete_annonce.php', {
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/x-www-form-urlencoded',
-                                            },
-                                            body: 'id_annonce=' + annonceId
-                                        })
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            if (data.success) {
-                                                this.closest('tr').remove();
-                                                alert(data.message);
-                                            } else {
-                                                alert('Erreur: ' + data.message);
-                                            }
-                                        });
-                                    }
-                                });
-                            });
-                            </script>
-
-                            
-
+                           
                         </div>
                     <?php endforeach; ?>
                 
@@ -120,6 +91,8 @@ echo '
                     <p><a href="deconnexion.php">Déconnexion</a></p>
                     <br><br>
                     <p><a href="new_annonce.php">Poster une annonce</a></p>
+                    <br>
+                    <p><a href="new_avis.php">Poster un commentaire</a></p>
     </div>
 </div>
     <?php

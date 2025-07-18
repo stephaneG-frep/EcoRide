@@ -1,38 +1,65 @@
 <?php
-session_start();
-require_once 'db/config.php';
-require_once "Users.php";
+error_reporting(-1);
+ini_set("display_errors", 1);
+//session_start();
+
 require_once "Annonce.php";
+require_once "Users.php";
+require_once 'db/config.php';
+require_once "include/head.php";
+require_once "include/header.php";
 
 // Vérifier l'id
-if (!isset($_SESSION['id'])) {
+if (isset($_SESSION['id'])){
+    $id = $_SESSION['id'];
+}else{
     header('Location: connexion.php');
     exit();
 }
-if(isset($_GET['id_annonce'])){
 
+if(isset($_GET['id_annonce'])){
     // Récupère l'ID de l'annonce à partir des paramètres de l'URL
     $id_annonce = $_GET['id_annonce'];
     //instancier le gestionnaire d'annonce
-    $newAnnonce = new Annonce();
+    $annonce = new Annonce();
     //récuppérer l'annonce par l'id
-    $result = $newAnnonce->getAnnonceById($id_annonce);
+    $result = $annonce->getAnnonceById($id_annonce);
 
-    try {
-        //supprimer l'annonce
-        $annonce = new Annonce();
-        $annonce_delete = $annonce->deleteAnnonce($id_annonce);
-        
-        $_SESSION['flash_success'] = 'Annonce supprimée avec succès';
-    } catch (PDOException $e) {
-        // Annuler en cas d'erreur
-        $db->rollBack();
-        $_SESSION['flash_error'] = 'Erreur lors de la suppression : ' . $e->getMessage();
-    }
-    
-    header('Location: connexion.php');
-    exit();
+    //données pour utilisation ultérieure ultérieure 
+	$email = $result['email'];
+    $id = $result['id'];//id = id de users
+
+    if($_SESSION['id'] == $id){
+        $id = $_SESSION['id'];
+
+        echo '
+			<script>
+				var confirmation = confirm("Êtes vous sûr de vouloir supprimer votre annonce  ?'.$email.'");
+
+				if(confirmation){
+					window.location.href = "delete_comfirm.php?id_annonce='.$id_annonce.'&id='.$id.'";
+				}else{
+					window.location.href = "profil.php";
+				}
+
+			</script>
+
+		';
+
+	}else{
+		
+		// Si l'utilisateur n'est pas le propriétaire, affiche une alerte et redirige vers la page de l'utilisateur
+		echo '
+			<script>
+			alert("Cette annonce ne vous appartient pas, vous ne pouvez pas la supprimer!");
+			window.location.href = "profil.php";
+			</script>
+		';
+	}
+
 }
 
-header('Location: connexion.php');
-exit();
+
+ 
+require_once "include/footer.php";
+?>

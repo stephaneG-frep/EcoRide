@@ -18,9 +18,12 @@ header{
     background-color: #222121;
     width: 100%;
 }
+/*
 nav{
     float: right;
+    margin-bottom: 20px;
 }
+*/
 .nav-link {
     list-style-type: none;
     margin: 0;
@@ -28,11 +31,11 @@ nav{
 }
 .nav-link,li {
     display: inline-block;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 .nav-link,li,a {
     text-decoration: none;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     color: cornsilk;
     padding: 10px 15px;
@@ -193,8 +196,9 @@ footer {
 }
 
 
-.container {
+.content {
     margin: 0 auto;
+    display: inline-block;
 }
 
 h1 {
@@ -231,16 +235,18 @@ h1 {
     background-color: #2980b9;
 }
 .annonces-list {
-    display: grid;
-    grid-template-columns: 80px,80px,80px;
-    
-    gap: 20px;
+    padding: 25px;
 }
 .annonce-card {
+    display: inline-block;
     background: white;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .annonce-header {
     display: flex;

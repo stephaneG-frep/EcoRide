@@ -1,7 +1,7 @@
 <?php
 //ob_start();
 require_once "Users.php";
-//require_once "Admin.php";
+require_once "Admin.php";
 
 ?>
 <header>
@@ -18,6 +18,7 @@ require_once "Users.php";
                     echo '<li><a href="reprofil.php">Changer le profil</a></li>';
                     echo '<li><a href="les_annonces.php">Les annonces</a></li>';
                     echo '<li><a href="les_profils.php">Les profils</a></li>';
+                    echo '<li><a href="les_commentaires.php">Les commentaires</a></li>';
                     echo '<li><button class="deconnect"><a href="deconnexion.php">OFF</a></button></li>';
                     echo '<li><button class="admin_connect"><a href="admin.php">admin</a></button></li>';
                         

@@ -2,6 +2,9 @@
 
 
 //inclure le fichier de connexion 
+
+use Pcntl\QosClass;
+
 require_once "db/Database.php";
 
 //class annonce en liaison avec class users
@@ -18,7 +21,7 @@ class Annonce{
     public function newAnnonce($departement,$vehicule,$place,$tarif,$description,$id,$id_annonce){
         //requete sql
         $query = "INSERT INTO annonce(departement,vehicule,place,tarif,description,id,id_annonce)
-                  VALUE(:departement,:vehicule,:place,:tarif,:description,:id,:id_annonce)";
+                  VALUES(:departement,:vehicule,:place,:tarif,:description,:id,:id_annonce)";
         //connection
         $dbConnexion = $this->db->getConnexion();
         $req = $dbConnexion->prepare($query);
@@ -81,7 +84,7 @@ class Annonce{
             $dbConnexion = $this->db->getConnexion();
             $req = $dbConnexion->prepare($query);
             $req->bindParam(':id_annonce', $id_annonce);
-            $req->execute([$id_annonce]);
+            $req->execute();
     
             return $req->rowCount() >0;
         }

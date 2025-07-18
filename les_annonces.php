@@ -60,7 +60,7 @@ $annonces = $annonce->getAllAnnonces();
 */
 ?>
 
-<div class="container">
+<div class="content">
 
                 <div class="annonces-list">
                     <?php foreach ($annonces as $annonce): ?>
