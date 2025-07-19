@@ -10,45 +10,81 @@ require_once "db/config.php";
 require_once "include/head.php";
 require_once "include/header.php";
 
+if($_SESSION['id']){
+    $id = $_SESSION['id'];
+   
+    //$id_annonce = $_SESSION['id_annonce'];
+    $new_user = new Users();
+    $user = $new_user->getUserById($id);
 
-//SessionManager::startSession();
-if(isset($_POST['connexion']) ){
-    //récuperer les données du formulaire dans des variables
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    //instancier la class user
     $admin = new Admin();
-    //appel a la méthode login(class Users)
-    $adminId = $admin->loginAdmin();
+    $admins = $admin->getAdminByIdUsers($id);
 
-
-    if($adminId){
-        $_SESSION['id_admin'] = $adminId;
-        //$_SESSION['email'] = $userId['email'];   
-        header('location: dashboard.php');
-        exit();
-        
-    }else{
-        $message = "Email ou mot-de-passe invalide";
+   
+    //$id = $id['id'];
+    $nom = $user['nom'];
+    $prenom = $user['prenom'];
+    $email = $user['email'];
+    $image = $user['photo_profil']; 
+    $admin = array(
+        $role = "utilisateur",
+        $role = "admin",
+        $role = "moderateur",
+    );
+    switch($admin['role']){
+        case 'utilisateur':
+            $role = 'utilisateur';
+    break;
+        case 'admin':
+            $role = 'admin';
+    break;
+        case 'moderateur':
+            $role = 'moderateur';
+    break;
+       
     }
-}
 
+    ?>
+    <title>Profil de <?= $user['nom'] ?></title>
+
+    </div>
+
+        <div id="login">
+            <h1 class="">Page admin de <?= $user['nom'] ?> </h1>
+            <div class="container">
+               
+                <div id="" class="">
+                    <div id="" class="">
+                        <div id="" class="">
+
+                    <table style="margin: 15px; font-size: 1rem">
+                        <tr>
+                            <td>Nom d'utilisateur: </td><td><?=$user['nom'] ?></td>
+                        </tr>                    
+                        <tr>
+                            <td>Adresse email:  </td><td><?=$user['email'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Role:  </td><td><?= $admin['role'] ?></td>
+                        </tr>
+                        <tr>
+                            <td><a href="reprofil.php">Modifier mon profil : </a>  </td>
+                        </tr>
+
+                    </table>
+
+                    <a href="niveau_admin.php" style="margin:10px">Supprimer ou modifier le role d'un membres</a>
+                    </br>
+                    <a href="les_annonces.php" style="margin: 10px;">Supprimer des annonces</a>
+                    </br>
+
+<?php
+}   
 ?>
-<div class="inscrip">
-    <h2 class="h2">Connexion</h2>
-    
-    <?php if(isset($message)) echo "<div class='erreurs'>".$message."</div>"; ?>
-
-        <form method="POST">
-            Email :
-            <input type="email" name="email" required >
-            <br>
-            Mot de passe :
-            <input type="password" name="password" required>
-            <br>
-            Connexion :
-            <input type="submit" name="connexion" value="connexion">
-        </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

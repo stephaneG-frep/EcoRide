@@ -241,7 +241,8 @@ h1 {
     display: inline-block;
     background: white;
     border-radius: 8px;
-    padding: 20px;
+    padding: 25px;
+    width: 350px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-bottom: 20px;
     margin-top: 30px;
@@ -288,6 +289,7 @@ h1 {
 .description {
     margin-top: 10px;
     color: #7f8c8d;
+    width: 150px;
 }
 .no-results {
     text-align: center;
