@@ -140,6 +140,16 @@ class Annonce{
             return $resultats;
             
         }
+
+        function getTotalAnnonce(){
+            $query = "SELECT COUNT(*) as total FROM annonce";
+            $dbConnexion = $this->db->getConnexion();
+            $req = $dbConnexion->prepare($query);
+            $req->execute();
+            $result = $req->fetch(PDO::FETCH_ASSOC);
+
+            return $result['total'];
+        }
          
 
     

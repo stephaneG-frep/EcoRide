@@ -1,8 +1,6 @@
 <?php
 require_once "../db/config.php";
 
-//adminOnly();
-
 require_once "template/header.php";
 
 ?>

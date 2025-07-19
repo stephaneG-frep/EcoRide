@@ -161,6 +161,16 @@ class Users{
             //retourner le nombres de lignes
             return $req->rowCount() > 0;
         }
+
+        function getTotalUsers(){
+            $query = "SELECT COUNT(*) as total FROM users";
+            $dbConnexion = $this->db->getConnexion();
+            $req = $dbConnexion->prepare($query);
+            $req->execute();
+            $result = $req->fetch(PDO::FETCH_ASSOC);
+
+            return $result['total'];
+        }
         
 
 }

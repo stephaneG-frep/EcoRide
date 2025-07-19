@@ -86,9 +86,7 @@ echo '
                             </div>
 
                             <button>
-                                <a href="admin/index.php/
-                                    <?= $admin['id_admin'] ?>">
-                                </a>                            
+                                <a href="admin/index.php/ <?= $admin['id_admin'] ?>">dashboard</a>
                             </button>
                            
                         </div>
