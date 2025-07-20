@@ -27,6 +27,23 @@ class Avis{
 
     }
 
+    public function getAvisById($id_avis){
+        // Définition de la requête SQL pour récupérer une annonce par son identifiant
+        $query = "SELECT * FROM avis WHERE id_avis = :id_avis";   
+        // Obtention de la connexion à la base de données
+        $dbConnexion = $this->db->getConnexion();   
+        // Préparation de la requête SQL
+        $req = $dbConnexion->prepare($query);   
+        // Liaison du paramètre :id_annonce dans la requête SQL avec la valeur fournie en argument
+        $req->bindParam(':id_avis', $id_avis);   
+        // Exécution de la requête SQL
+        $req->execute();   
+        // Récupération du résultat sous forme de tableau associatif
+        $result = $req->fetch(PDO::FETCH_ASSOC);   
+        // Retour du tableau associatif contenant les informations de la production
+        return $result;
+    }
+
     //récuperer les tous les commentaires
     public function getAllCommentaires(){
     // Requête pour récupérer toutes les annonces avec les infos des utilisateurs
@@ -57,6 +74,17 @@ class Avis{
         $result = $req->fetch(PDO::FETCH_ASSOC);
 
         return $result['total'];
+    }
+
+    //supprimer le commentaire
+    public function deleteAvis($id_avis){
+        $query = "DELETE FROM avis WHERE id_avis =:id_avis";
+        $dbConnexion = $this->db->getConnexion();
+        $req = $dbConnexion->prepare($query);
+        $req->bindParam(':id_avis', $id_avis);
+        $req->execute();
+
+        return $req->rowCount() >0;
     }
 
 

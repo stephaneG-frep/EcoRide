@@ -74,6 +74,7 @@ class Users{
         
     }
 
+    //méthode de récupération l'user par le role
     public function getByRole($role){
         $query = "SELECT * FROM users WHERE role = :role";
         $dbConnexion = $this->db->getConnexion();
@@ -122,6 +123,7 @@ class Users{
      return $req->rowCount() > 0;
                                        
     }
+
     function getUser($limit=null,$page=null)
  {
     $query = 'SELECT * FROM users ORDER BY id DESC';
@@ -151,7 +153,7 @@ class Users{
     return $users;
 }
 
-    //méthode de récupération des emails poue changer le profil
+    //méthode de récupération des emails pour changer le profil
     public function getUserByEmailId($id,$email){
         //requete 
         $query = "SELECT * FROM users WHERE email = :email AND id != :id";

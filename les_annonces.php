@@ -75,6 +75,7 @@ $annonces = $annonce->getAllAnnonces();
                             
                             <div class="annonce-details">
                                 <span class="departement"><?= htmlspecialchars($annonce['departement']) ?></span>
+                                <p>"Je part de ".<?=$annonce['depart']?>." et je me rend a ".<?=$annonce['arrive']?></p>
                                 <h2><?= htmlspecialchars($annonce['vehicule']) ?></h2>
                                 <p class="tarif"><?= htmlspecialchars($annonce['tarif']) ?> €</p>
                                 <p><strong>Places disponibles:</strong> <?= htmlspecialchars($annonce['place']) ?></p>

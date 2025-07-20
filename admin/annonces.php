@@ -44,7 +44,7 @@ $totalPages = ceil($totalAnnonces / 10);
     <tbody>
         <?php foreach($annonces as $annonce) {?>
         <tr>
-            <th scope="row"><?=$annonce['id']?></th>
+            <th scope="row"><?=$annonce['id_annonce']?></th>
             <td><?=$annonce['departement']?></td>
             <td><?=$annonce['vehicule']?></td>
             <td><?=$annonce['place']?></td>
@@ -52,9 +52,9 @@ $totalPages = ceil($totalAnnonces / 10);
             <td><?=$annonce['description']?></td>
             
             <td>
-                <a href="addEmployer.php">Add</a>
-                <a href="employer_delete.php?id=<?= $annonce['id'] ?>"
-                    onclick="return confirm('Êtes-vous sûr de vouloir supprimercet animal ?')">Supprimer</a>
+                
+                <a href="delete_annonce.php?id=<?= $annonce['id_annonce'] ?>"
+                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?')">Supprimer</a>
             </td>
         </tr>
         <?php }?>

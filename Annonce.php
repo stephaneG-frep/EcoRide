@@ -1,9 +1,5 @@
 <?php
-
-
 //inclure le fichier de connexion 
-
-use Pcntl\QosClass;
 
 require_once "db/Database.php";
 
@@ -14,18 +10,20 @@ class Annonce{
     private $db;
     //constructeur pour inicier la connexion
     public function __construct(){
-        //appel a la méethode getInstance
+        //appel a la méthode getInstance
         $this->db = Database::getInstance();
     }
 
-    public function newAnnonce($departement,$vehicule,$place,$tarif,$description,$id,$id_annonce){
+    public function newAnnonce($departement,$depart,$arrive,$vehicule,$place,$tarif,$description,$id,$id_annonce){
         //requete sql
-        $query = "INSERT INTO annonce(departement,vehicule,place,tarif,description,id,id_annonce)
-                  VALUES(:departement,:vehicule,:place,:tarif,:description,:id,:id_annonce)";
+        $query = "INSERT INTO annonce(departement,depart,arrive,vehicule,place,tarif,description,id,id_annonce)
+                  VALUES(:departement,:depart,:arrive,:vehicule,:place,:tarif,:description,:id,:id_annonce)";
         //connection
         $dbConnexion = $this->db->getConnexion();
         $req = $dbConnexion->prepare($query);
         $req->bindParam(':departement',$departement);
+        $req->bindParam(':depart',$depart);
+        $req->bindParam(':arrive',$arrive);
         $req->bindParam(':vehicule',$vehicule);
         $req->bindParam(':place',$place);
         $req->bindParam(':tarif',$tarif);
@@ -100,7 +98,7 @@ class Annonce{
 
             */
             // Requête pour récupérer toutes les annonces avec les infos des utilisateurs
-            $query = "SELECT a.id_annonce, a.departement, a.vehicule, a.place, a.tarif, a.description,
+            $query = "SELECT a.id_annonce, a.departement,a.depart, a.arrive, a.vehicule, a.place, a.tarif, a.description,
                      a.id as user_id, u.nom,u.prenom,u.email,u.photo_profil FROM annonce a
                      JOIN users u ON a.id = u.id ORDER BY a.id_annonce DESC";
 
@@ -121,9 +119,27 @@ class Annonce{
             return $resultats;
         }
 
+        public function getAnnonceByDepart($depart){
+            $query = "SELECT a.id_annonce, a.departement, a.depart, a.arrive, a.vehicule, a.place, a.tarif, a.description,
+                        u.nom, u.prenom, u.email, u.photo_profil FROM annonce a
+                       JOIN users u ON a.id = u.id WHERE a.departement LIKE :depart
+                       ORDER BY a.id_annonce DESC";
+            $dbConnexion = $this->db->getConnexion();
+            $req = $dbConnexion->prepare($query);
+            $req->bindParam(':depart',$depart);
+            $req->execute();
+            $resultats = array();
+            while($ligne = $req->fetch(PDO::FETCH_ASSOC)){
+                $resultats[] = $ligne;
+            }
+
+            return $resultats;
+            
+        }
+
         public function getAnnonceByDepartement($departement){
            
-            $query = "SELECT a.id_annonce, a.departement, a.vehicule, a.place, a.tarif, a.description,
+            $query = "SELECT a.id_annonce, a.departement, a.depart, a.arrive, a.vehicule, a.place, a.tarif, a.description,
                         u.nom, u.prenom, u.email, u.photo_profil FROM annonce a
                        JOIN users u ON a.id = u.id WHERE a.departement LIKE :departement
                        ORDER BY a.id_annonce DESC";

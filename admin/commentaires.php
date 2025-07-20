@@ -33,6 +33,7 @@ $totalPages = ceil($totalAnnonces / 10);
 <table class="table">
     <thead>
         <tr>
+
             <th scope="col">#</th>
             <th scope="col">Email</th>
             <th scope="col">Commentaire</th>
@@ -43,16 +44,16 @@ $totalPages = ceil($totalAnnonces / 10);
     <tbody>
         <?php foreach($commentaires as $commentaire) {?>
         <tr>
-            <th scope="row"><?=$commentaire['id']?></th>
+            <th scope="row"><?=$commentaire['id_avis']?></th>
             <td><?=$commentaire['email']?></td>
             <td><?=$commentaire['commentaire']?></td>
             <td><?=$commentaire['etoile']?></td>
             
             
             <td>
-                <a href="addEmployer.php">Add</a>
-                <a href="employer_delete.php?id=<?= $commentaire['id'] ?>"
-                    onclick="return confirm('Êtes-vous sûr de vouloir supprimercet animal ?')">Supprimer</a>
+                
+                <a href="delete_commentaire.php?id=<?= $commentaire['id_avis'] ?>"
+                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')">Supprimer</a>
             </td>
         </tr>
         <?php }?>

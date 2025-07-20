@@ -8,7 +8,8 @@ require_once "Users.php";
 require_once "Avis.php";
 require_once "include/header.php";
 require_once "fonction/check.php";
-
+// si il y a un id donc un user instancier un nouvel user et l'appeler avec la méthode getUser...
+// de la classe Users
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
     $new_user = new Users();
@@ -21,19 +22,19 @@ if (isset($_SESSION['id'])) {
     $email = $user['email'];
     $image = $user['photo_profil']; 
     //$annonce = $user['annonce'];
-
+//sino retour a la page de connexion
 }else{
     
     header('Location: connexion.php');
     exit();
 }
 
-
+//si on poste "attribuer"
 if(isset($_POST['attribuer'])){
-
+    //alors l'avis est vérifier pour la sécuritée
     $avis = htmlspecialchars(check($_POST['commentaire']));
     $etoile = htmlspecialchars(check($_POST['etoile']));
-
+    //tous doit etre remplis dans le formulaire
     if(empty($_POST['commentaire'])){
         $message = "Ecrire un commentaire";
     }elseif(empty($_POST['etoile'])){
@@ -41,7 +42,7 @@ if(isset($_POST['attribuer'])){
     }else{
         $commentaire = $_POST['commentaire'];
         $etoile = $_POST['etoile'];
-
+        //instancier un nouvel avis et méthode de la requete SQL
         $avis = new Avis();
         $result = $avis->newAvis($commentaire,$etoile,$id,$id_avis);
 

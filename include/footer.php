@@ -8,7 +8,7 @@
     <ul>
         <li><a href="#">Email:-Nous contacter-</a></li>
         <li><a href="apropos.php">A-propos</a></li>
-        <li><a href="#">Menssion légal</a></li>
+        <li><a href="mentions_legales.html">Mensions légales</a></li>
     </ul>
 </footer>
 </html>

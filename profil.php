@@ -1,7 +1,8 @@
 <?php
+//pour vérifier les erreurs 
 error_reporting(-1);
 ini_set("display_errors", 1);
-
+//inclure les fichiers nécéssaire
 require_once "Users.php";
 require_once "Annonce.php";
 require_once "db/config.php";
@@ -12,10 +13,13 @@ require_once "include/header.php";
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
     //$id_annonce = $_SESSION['id_annonce'];
+    //instancier un user
     $new_user = new Users();
+    //appel a la méthode getUserById de la classe Users
     $user = $new_user->getUserById($id);
-
+    //onstancier une nouvelle annonce
     $new_annonce = new Annonce();
+    //méthode getAnnon....de la classe Annonce
     $annonces = $new_annonce->getAnnonceByIdUser($id);
 
    
@@ -26,13 +30,6 @@ if (isset($_SESSION['id'])) {
     $image = $user['photo_profil']; 
     $role = $user['role'];
 
-    //$annonces = $id_annonce['id_annonce'];
-/*
-}else{   
-    header('Location: connexion.php');
-    exit();
-}
-*/
 ?>
 
 <h1>Bienvenue, <?php echo $user['prenom']." ".  $user['nom']; ?>!</h1>    
@@ -41,7 +38,9 @@ if (isset($_SESSION['id'])) {
 
     
 <?php
+//ecrire du html en passant par l'ouverture de php et echo (html dans le php)
 echo '
+
 <br><br>
 <div class="">        
      <section class="item-1">
@@ -59,6 +58,9 @@ echo '
 
     </div>';   
 ?>
+<!-- 
+ ecrir du html en passant par l'ouveture de php que pour le php (html en dehors du php)
+-->
     <div class="annonces-list">
                
                     <?php foreach ($annonces as $annonce): ?>
@@ -79,12 +81,6 @@ echo '
                                 <p><strong>Places disponibles:</strong> <?= htmlspecialchars($annonce['place']) ?></p>
                                 <p class="description"><?php echo $annonce['description']; ?></p>
                             </div>
-
-                            <button>
-                                <a href="delete_annonce.php/<?php $annonce['id_annonce'];?>"
-                                    onclick="return confirm('Vous etes sur de vouloir la supprimer ?')">supp
-                                </a>                            
-                            </button>
                            
                         </div>
                     <?php endforeach; ?>
@@ -96,9 +92,9 @@ echo '
                 }
                 ?>
                     <p><a href="deconnexion.php">Déconnexion</a></p>
-                    <br><br>
+
                     <p><a href="new_annonce.php">Poster une annonce</a></p>
-                    <br>
+                    
                     <p><a href="new_avis.php">Poster un commentaire</a></p>
     </div>
 </div>

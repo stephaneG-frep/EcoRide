@@ -14,13 +14,11 @@ if (isset($_SESSION['id'])) {
     $new_user = new Users();
     $user = $new_user->getUserById($id);
 
-
-    //$id = $id['id'];
     $nom = $user['nom'];
     $prenom = $user['prenom'];
     $email = $user['email'];
     $image = $user['photo_profil']; 
-    //$annonce = $user['annonce'];
+    
 
 }else{
     
@@ -31,6 +29,8 @@ if (isset($_SESSION['id'])) {
 if(isset($_POST['nouvelle_annonce'])){
 
     $departement = htmlspecialchars(check($_POST['departement']));
+    $depart = htmlspecialchars(check($_POST['depart']));
+    $arrive = htmlspecialchars(check($_POST['arrive']));
     $vehicule = htmlspecialchars(check($_POST['vehicule']));
     $place = htmlspecialchars(check($_POST['place']));
     $tarif = htmlspecialchars(check($_POST['tarif']));
@@ -38,6 +38,10 @@ if(isset($_POST['nouvelle_annonce'])){
 
     if(empty($_POST['departement'])){
         $message = "Choisir un departement";
+    }elseif(empty($_POST['depart'])){
+        $message = "Entrer un ville de départ";
+    }elseif(empty($_POST['arrive'])){
+        $message = "Entrer une ville d'arrivée";
     }elseif(empty($_POST['vehicule'])){
         $message = "Choisir un vehicule";
     }elseif(empty($_POST['tarif']) || !ctype_digit($_POST['tarif'])){
@@ -46,14 +50,9 @@ if(isset($_POST['nouvelle_annonce'])){
         $message = "Ecrir une petite description";
     }else{
 
-        $departement = $_POST['departement'];
-        $vehicule = $_POST['vehicule'];
-        $place = $_POST['place'];
-        $tarif = $_POST['tarif'];
-        $description = ['description'];
-
+        
         $annonce = new Annonce();
-        $result = $annonce->newAnnonce($departement,$vehicule,$place
+        $result = $annonce->newAnnonce($departement,$depart, $arrive, $vehicule,$place
                                 ,$tarif,$description,$id,$id_annonce);
 
         if($result){
@@ -184,9 +183,12 @@ if(isset($_POST['nouvelle_annonce'])){
     </select>
     <br>
     <br>
- <!--   Votre département : 
-    <input type="text" name="departement" placeholder="votre département">
-    <br>-->
+    Quelle nest votre localitée de départ : <br>
+    <input type="text" name="depart" placeholder="localitée de départ:">
+    <br>
+    Quelle nest votre localitée de d'arrivée : <br>
+    <input type="text" name="arrive" placeholder="localitée d'arrivée:">
+    <br>
     Quelle est votre véhicule : <br>
     <select name="vehicule" id="pet-select">
         <option  value="">--Quel est voter véhicule--</option>
@@ -207,7 +209,8 @@ if(isset($_POST['nouvelle_annonce'])){
     <br>
     Petite déscription :
     <br>
-    <textarea type="text" name="description" cols="40px" rows="10px" placeholder="petite description" ></textarea>       
+    <textarea type="text" name="description" cols="40px" rows="10px"
+     placeholder="petite description" ></textarea>       
     <br>
     
     Inscription : <input type="submit" name="nouvelle_annonce"

@@ -56,7 +56,7 @@ $totalPages = ceil($totalUsers / 10);
             <td><?=$user['role']?></td>
             <td>
                 <a href="delete_users.php?id=<?= $user['id'] ?>"
-                    onclick="return confirm('Êtes-vous sûr de vouloir supprimercet animal ?')">Supprimer</a>
+                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
             </td>
         </tr>
         <?php }?>

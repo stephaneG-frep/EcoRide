@@ -150,9 +150,8 @@ h1 {
 
 #logo{
     float: inline-start;
-    font-size: 30px;
-    font-weight: bolder;
-    padding: 30px;
+    width: 100px;
+    height: 100px;    
     margin-right: 150px;
 }
 
