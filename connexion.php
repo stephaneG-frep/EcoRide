@@ -4,9 +4,11 @@ ini_set("display_errors", 1);
 
 //require_once "session/SessionManager.php";
 require_once "Users.php";
-//require_once "db/config.php";
+//require_once "admin/index.php";
+require_once "db/config.php";
 require_once "include/head.php";
 require_once "include/header.php";
+//require_once "admin/index.php";
 
 
 //SessionManager::startSession();
@@ -25,7 +27,7 @@ if(isset($_POST['connexion']) ){
         //$_SESSION['email'] = $userId['email'];   
         header('location: index.php');
         exit();
-        
+
     }else{
         $message = "Email ou mot-de-passe invalide";
     }

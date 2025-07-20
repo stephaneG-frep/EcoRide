@@ -98,6 +98,28 @@ class Admin {
         
     }
 
+    //méthode de connexion 
+    public function AdminLogin($email,$password){
+        //requetev de selection
+        $query = "SELECT id, password, role FROM users WHERE email = :email";
+        //connexion a la bdd 
+        $dbConnexion = $this->db->getConnexion();
+        //préparer la requete
+        $req = $dbConnexion->prepare($query);
+        //lier les paramettres
+        $req->bindParam(':email',$email);
+        //executer la requete
+        $req->execute();
+        //recuperer le resultat dans un tableau assoc
+        $user = $req->fetch(PDO::FETCH_ASSOC);
+        //vérifier le password 
+        if($user && password_verify($password,$user['password'])){
+            return $user['id'];
+        }
+        return false;
+        
+    }
+
 
 
 

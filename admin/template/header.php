@@ -1,9 +1,9 @@
 <?php 
+//adminOnly();
 
-require_once  "../db/config.php";
-
-
-
+//require_once "../../Users.php";
+//require_once  "../../db/config.php";
+//require_once "../../session/session.php";
 //adminOnly();
 
 ?>
@@ -34,14 +34,14 @@ require_once  "../db/config.php";
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="../index.php" class="nav-link active" aria-current="page">
+                    <a href="./index.php" class="nav-link active" aria-current="page">
                         <i class="bi bi-house-fill"></i>
                         Home
                     </a>
                 </li>
 
                 <li>
-                    <a href="animaux.php" class="nav-link text-white">
+                    <a href="./commentaires.php" class="nav-link text-white">
                     <i class="bi bi-tencent-qq"></i>
                         </svg>
                         Commentaires:
@@ -50,7 +50,7 @@ require_once  "../db/config.php";
 
 
                 <li>
-                    <a href="../users.php" class="nav-link text-white">
+                    <a href="./users.php" class="nav-link text-white">
                     <i class="bi bi-person-circle"></i>
                         </svg>
                         Users:
@@ -59,7 +59,7 @@ require_once  "../db/config.php";
 
         
                 <li>
-                    <a href="../annonces.php" class="nav-link text-white">
+                    <a href="./annonces.php" class="nav-link text-white">
                     <i class="bi bi-image"></i>
                         </svg>
                         Annonces:

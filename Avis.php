@@ -49,6 +49,16 @@ class Avis{
         return $resultats;
     }
 
+    function getTotalAvis(){
+        $query = "SELECT COUNT(*) as total FROM avis";
+        $dbConnexion = $this->db->getConnexion();
+        $req = $dbConnexion->prepare($query);
+        $req->execute();
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+
+        return $result['total'];
+    }
+
 
 }
 

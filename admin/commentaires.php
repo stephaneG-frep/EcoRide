@@ -1,15 +1,11 @@
 <?php
-error_reporting(-1);
-ini_set("display_errors", 1);
 //incluer les fichier nécéssaire
-
 require_once "../session/session.php";
 //adminOnly();
 
 require_once "template/header.php";
 require_once "../db/config.php";
-require_once "../Users.php";
-
+require_once "../Avis.php";
 
 
 
@@ -20,42 +16,42 @@ if (isset($_GET['page'])) {
 }
 
 //instancier un user
-$new_users = new Users();
+$new_commentaire = new Avis();
 //rammener tous les users 10 par pages
-$users = $new_users->getAllUsers();
+$commentaires = $new_commentaire->getAllCommentaires($connexion, 10, $page);
 
 //compter
-$totalUsers = $new_users->getTotalUsers();
+$totalAnnonces = $new_commentaire->getTotalAvis();
 
-$totalPages = ceil($totalUsers / 10);
+$totalPages = ceil($totalAnnonces / 10);
 
 
 ?>
 
-<h1 class="py-5">Listes des Users</h1>
+<h1 class="py-5">Listes des commentaires </h1>
 
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Prénom</th>
             <th scope="col">Email</th>
-            <th scope="col">Image</th>
-            <th scope="col">role</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">Etoile</th>
+            
         </tr>
     </thead>
     <tbody>
-        <?php foreach($users as $user) {?>
+        <?php foreach($commentaires as $commentaire) {?>
         <tr>
-            <th scope="row"><?=$user['id']?></th>
-            <td><?=$user['nom']?></td>
-            <td><?=$user['prenom']?></td>
-            <td><?=$user['email']?></td>
-            <td><img src="<?='./img/photo_profil/'.$user['photo_profil'] ?>" alt="" class="rounded rounded-circle" width="100" height="100"></td>
-            <td><?=$user['role']?></td>
+            <th scope="row"><?=$commentaire['id']?></th>
+            <td><?=$commentaire['email']?></td>
+            <td><?=$commentaire['commentaire']?></td>
+            <td><?=$commentaire['etoile']?></td>
+            
+            
             <td>
-                <a href="delete_users.php?id=<?= $user['id'] ?>"
+                <a href="addEmployer.php">Add</a>
+                <a href="employer_delete.php?id=<?= $commentaire['id'] ?>"
                     onclick="return confirm('Êtes-vous sûr de vouloir supprimercet animal ?')">Supprimer</a>
             </td>
         </tr>

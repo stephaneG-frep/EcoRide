@@ -28,7 +28,7 @@ $totalPages = ceil($totalAnnonces / 10);
 
 ?>
 
-<h1 class="py-5">Listes des </h1>
+<h1 class="py-5">Listes des annonces</h1>
 
 <table class="table">
     <thead>

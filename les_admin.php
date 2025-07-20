@@ -11,13 +11,11 @@ require_once "include/header.php";
 // Démarrer la session et vérifier si l'utilisateur est connecté
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
+    //$role = $_SESSION['role'];
    
     //$id_annonce = $_SESSION['id_annonce'];
     $new_user = new Users();
-    $user = $new_user->getUserById($id);
-
-    //$new_admin = new Admin();
-    //$admins = $new_admin->getAdminByIdUsers($id);
+    $users = $new_user->getUserById($id);
 
     $new_admin = new Admin();
     $admins = $new_admin->getAllAdmin();
@@ -28,6 +26,7 @@ if (isset($_SESSION['id'])) {
     $prenom = $user['prenom'];
     $email = $user['email'];
     $image = $user['photo_profil']; 
+    $role = $user['role'];
 
     //$annonces = $id_annonce['id_annonce'];
 /*
@@ -63,7 +62,7 @@ echo '
 ?>
     <div class="annonces-list">
                
-                    <?php foreach ($admins as $admin): ?>
+                    <?php foreach ($users as $user): ?>
                        
            
            
@@ -80,16 +79,21 @@ echo '
                             </div>
                             
                             <div class="annonce-details">
-                                <span class="departement"><?= htmlspecialchars($admin['role']) ?></span>
+                                <span class="departement"><?= htmlspecialchars($user['role']) ?></span>
                                
                                 
                             </div>
-
+                        <?php    
+                        if($_SESSION['role'] === "admin"){
+                       
+                        ?>
                             <button>
-                                <a href="admin/index.php/ <?= $admin['id_admin'] ?>">dashboard</a>
+                                <a href="admin/index.php/ <?= $user['role'] === 'admin' ?>">dashboard</a>
                             </button>
                            
                         </div>
+                        <?php } ?>
+                       
                     <?php endforeach; ?>
                 
 

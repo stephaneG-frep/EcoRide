@@ -20,18 +20,20 @@ class Users{
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Requête préparée pour éviter les injections SQL
-            $query = "INSERT INTO users(nom,prenom,email,password,photo_profil) 
-                      VALUES(:nom,:prenom,:email,:password,:photo_profil)";
+            $query = "INSERT INTO users(nom,prenom,email,password,photo_profil,role) 
+                      VALUES(:nom,:prenom,:email,:password,:photo_profil,:role)";
             //connexion a la base
             $dbConnexion = $this->db->getConnexion();
             //requette prépaeée
             $req = $dbConnexion->prepare($query);
             //lier les paramettres entre eux(paramettre nommé avec les valeurs récupérées)
-            $req->bindParam(':nom', $nom);
+            $role = 'user';
+            $req->bindParam(':nom',$nom);
             $req->bindParam(':prenom',$prenom);
             $req->bindParam(':email', $email);
             $req->bindParam(':password', $hashedPassword);
             $req->bindParam(':photo_profil',$photo_profil);
+            $req->bindParam(':role',$role);
             //executer la requette
             $req->execute();
             //retourne et vérifie le nombre de ligne inséréees
@@ -53,7 +55,7 @@ class Users{
     //méthode de connexion 
     public function login($email,$password){
         //requetev de selection
-        $query = "SELECT id, password FROM users WHERE email = :email";
+        $query = "SELECT id, password  FROM users WHERE email = :email ";
         //connexion a la bdd 
         $dbConnexion = $this->db->getConnexion();
         //préparer la requete
@@ -70,6 +72,15 @@ class Users{
         }
         return false;
         
+    }
+
+    public function getByRole($role){
+        $query = "SELECT * FROM users WHERE role = :role";
+        $dbConnexion = $this->db->getConnexion();
+        $req = $dbConnexion->prepare($query);
+        $req->bindParam(':role',$role);
+        $req->execute();
+        return $req->fetch(PDO::FETCH_ASSOC);
     }
 
     //méthode de récupération de l'id de l'utilisateur
@@ -92,16 +103,18 @@ class Users{
     public function updateProfil($id,$nom,$prenom,$email,$photo_profil){
     //requete sql 
     $query = "UPDATE users SET nom=:nom,prenom=:prenom,email=:email,
-                                photo_profil=:photo_profil WHERE id=:id";
+                                photo_profil=:photo_profil,role=:role WHERE id=:id";
     //connexiona la BDD
     $dbConnexion = $this->db->getConnexion();
     //requete préparée
     $req = $dbConnexion->prepare($query);
     //lier les paramettres
+    $role = "user";
     $req->bindParam(':nom', $nom);
     $req->bindParam(':prenom',$prenom);
     $req->bindParam(':email', $email);
     $req->bindParam(':photo_profil',$photo_profil);
+    $req->bindParam(':role',$role);
     $req->bindParam(':id',$id);
     //executer la requette
     $req->execute();
@@ -109,6 +122,34 @@ class Users{
      return $req->rowCount() > 0;
                                        
     }
+    function getUser($limit=null,$page=null)
+ {
+    $query = 'SELECT * FROM users ORDER BY id DESC';
+     //connexiona la BDD
+     $dbConnexion = $this->db->getConnexion();
+
+    if ($limit && !$page) {
+        $query .= ' LIMIT :limit';
+    }
+    if ($page) {
+        $query .= " LIMIT :offset, :limit";
+    }
+
+    $req = $dbConnexion->prepare($query);
+
+    if ($limit) {
+        $req->bindParam(':limit', $limit, PDO::PARAM_INT);
+    }
+    if ($page) {
+        $offset = ($page - 1) * $limit;
+        $req->bindValue(":offset", $offset, PDO::PARAM_INT);
+    }
+
+
+    $req->execute();
+    $users = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $users;
+}
 
     //méthode de récupération des emails poue changer le profil
     public function getUserByEmailId($id,$email){

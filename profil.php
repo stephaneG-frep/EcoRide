@@ -24,6 +24,7 @@ if (isset($_SESSION['id'])) {
     $prenom = $user['prenom'];
     $email = $user['email'];
     $image = $user['photo_profil']; 
+    $role = $user['role'];
 
     //$annonces = $id_annonce['id_annonce'];
 /*
@@ -36,6 +37,7 @@ if (isset($_SESSION['id'])) {
 
 <h1>Bienvenue, <?php echo $user['prenom']." ".  $user['nom']; ?>!</h1>    
 <p>Email: <?php echo $user['email']; ?></p>
+<p>Role : <?php echo $user['role']; ?></p>
 
     
 <?php
@@ -86,8 +88,13 @@ echo '
                            
                         </div>
                     <?php endforeach; ?>
-                
-
+                <?php
+                if($user['role'] === "admin"){
+                ?>
+                    <p><a href="admin/index.php">Dashboard</a></p>
+                <?php
+                }
+                ?>
                     <p><a href="deconnexion.php">Déconnexion</a></p>
                     <br><br>
                     <p><a href="new_annonce.php">Poster une annonce</a></p>
