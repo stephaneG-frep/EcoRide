@@ -148,8 +148,8 @@ if(isset($_SESSION['id'])){
                                 
                                 <div class="annonce-details">
                                     <span class="departement"><?= htmlspecialchars($annonce['depart']) ?></span>
-                                    <p>"Je part de <?=$annonce['depart']?>  et je me rend a  <?=$annonce['arrive']?></p>
-                                    <h2><?= htmlspecialchars($annonce['vehicule']) ?></h2>
+                                    <p>Je part de <?=$annonce['depart']?>  et je me rend a  <?=$annonce['arrive']?></p>
+                                    <p><strong> class="h2"><?= htmlspecialchars($annonce['vehicule']) ?></strong></p>
                                     <p class="tarif"><?= htmlspecialchars($annonce['tarif']) ?> €</p>
                                     <p><strong>Places disponibles:</strong> <?= htmlspecialchars($annonce['place']) ?></p>
                                     <p class="description"><?= $annonce['description'] ?></p>

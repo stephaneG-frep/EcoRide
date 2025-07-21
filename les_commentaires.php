@@ -24,7 +24,7 @@ $commentaires = $commentaire->getAllCommentaires();
             <?php foreach ($commentaires as $commentaire): ?>
                 <div class="annonce-card">
                     <div class="annonce-header">
-                        <img src="<?= htmlspecialchars($commentaire['photo_profil'] ?? 'default_profile.jpg') ?>" alt="Photo de profil" class="user-photo">
+                        <img src="img/photo_profil/?=$commentaire['photo_profil'] ?>" alt="Photo de profil" class="user-photo">
                         <div class="user-info">
                             <h3><?= htmlspecialchars($commentaire['prenom'] . ' ' . $commentaire['nom']) ?></h3>
                             <h3><?=$commentaire['email']?></h3>

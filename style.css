@@ -70,6 +70,7 @@ h1 {
     font-size: 52px;
     font-weight: bold;
 }
+
 .h2{
     display: grid;
     place-items: center;
@@ -148,8 +149,7 @@ h1 {
     margin-bottom: 15px;
     background: -webkit-linear-gradient(rgb(199, 255, 67)0%, rgb(113, 223, 159));
     background-clip: text;
-    -webkit-text-fill-color: transparent;
-    
+    -webkit-text-fill-color: transparent;    
  }
 
 #logo{

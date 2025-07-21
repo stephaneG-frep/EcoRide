@@ -6,7 +6,7 @@ require_once "db/config.php";
 require_once "include/head.php";
 require_once "include/header.php";
 require_once "fonction/check.php";
-require_once "fonction/token.php";
+//require_once "fonction/token.php";
 
 
 //recupérer les données du formulaire

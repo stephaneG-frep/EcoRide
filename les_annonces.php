@@ -66,7 +66,7 @@ $annonces = $annonce->getAllAnnonces();
                     <?php foreach ($annonces as $annonce): ?>
                         <div class="annonce-card">
                             <div class="annonce-header">
-                                <img src="<?= htmlspecialchars($annonce['photo_profil'] ?? 'default_profile.jpg') ?>" alt="Photo de profil" class="user-photo">
+                                <img src="img/photo_profil/<?= $annonce['photo_profil'] ?>" alt="Photo de profil" class="user-photo">
                                 <div class="user-info">
                                     <h3><?= htmlspecialchars($annonce['prenom'] . ' ' . $annonce['nom']) ?></h3>
                                     <h3><?=$annonce['email']?></h3>
