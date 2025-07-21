@@ -40,9 +40,9 @@ $users = $allUsers->getAllUsers();
             <div class="item-1a">
                 <img class="photo_profil" src="img/photo_profil/'.$image.'" alt="photo de profil">   
             </div>
-            <h4>Nom : '.$nom.'</h4>
-            <h4>Prénom : '.$prenom.'</h4>
-            <h4>Email : '.$email.'</h4> 
+            <h6>Nom : '.$nom.'</h6>
+            <h6>Prénom : '.$prenom.'</h6>
+            <h6>Email : '.$email.'</h6> 
             <br>
             <div class="">
                 <button class="buttonProfil"><a href="profil.php">Profil</a></button>
@@ -52,18 +52,7 @@ $users = $allUsers->getAllUsers();
         </section>
       ';
     }
-    echo '
-    </div>
-        <br><br>
-       
-        <h2 class="h2">Ils donne leurs avis</h2>   
-        <article class="item-2">                     
-                <h4>Nom : '.$nom.'</h4>
-                <h4>Prénom : '.$prenom.'</h4>
-                <p>Avis : lorem 20 lorem morem ipsum tralalal hitout uhgu bjb dfgh xcv  </p>
-        </article>
-        '
-        ;
+   
     }else{
 
     }?>

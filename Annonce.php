@@ -122,11 +122,11 @@ class Annonce{
         public function getAnnonceByDepart($depart){
             $query = "SELECT a.id_annonce, a.departement, a.depart, a.arrive, a.vehicule, a.place, a.tarif, a.description,
                         u.nom, u.prenom, u.email, u.photo_profil FROM annonce a
-                       JOIN users u ON a.id = u.id WHERE a.departement LIKE :depart
+                       JOIN users u ON a.id = u.id WHERE a.depart LIKE :depart
                        ORDER BY a.id_annonce DESC";
             $dbConnexion = $this->db->getConnexion();
             $req = $dbConnexion->prepare($query);
-            $req->bindParam(':depart',$depart);
+            $req->bindValue(':depart','%'.$depart.'%', PDO::PARAM_STR);
             $req->execute();
             $resultats = array();
             while($ligne = $req->fetch(PDO::FETCH_ASSOC)){

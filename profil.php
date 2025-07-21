@@ -47,9 +47,9 @@ echo '
         <div class="item-1a">
             <img class="photo_profil" src="img/photo_profil/'.$image.'" alt="photo de profil">   
         </div>
-        <h4>Nom : '.$nom.'</h4>
-        <h4>Prénom : '.$prenom.'</h4>
-        <h4>Email : '.$email.'</h4> 
+        <h6>Nom : '.$nom.'</h6>
+        <h6>Prénom : '.$prenom.'</h6>
+        <h6>Email : '.$email.'</h6> 
         <br>
     </section>
      

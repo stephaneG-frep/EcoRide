@@ -8,14 +8,16 @@ body{
     display: grid;
     place-items: center;
     margin: auto;
-    background-color: darkolivegreen;
-    color: rgb(240, 180, 106);
+    background-image: url("img/ecran_eco.jpg");
+    background-size: cover;
+    color: rgb(2, 82, 29);
     text-align: center;
     align-items: center;
+    width: 100%;
 }
 
 header{
-    background-color: #222121;
+    background-color: #4dbb7b;
     width: 100%;
 }
 /*
@@ -45,8 +47,8 @@ nav{
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    color: #2874A6;
-    background-color: brown;   
+    color: #9bf3a2;
+    background-color: rgb(151, 100, 4);   
 }
 .buttonProfil{
     width: auto;
@@ -59,18 +61,19 @@ nav{
 h1 {
     display: grid;
     place-items: center;
-    background: -webkit-linear-gradient(rgb(241, 5, 5)0%, rgb(253, 228, 4));
+    background: -webkit-linear-gradient(rgb(199, 255, 67)0%, rgb(113, 223, 159));
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-top: 25px;
     text-decoration-line: underline;
     margin-bottom: 20px;
     font-size: 52px;
+    font-weight: bold;
 }
 .h2{
     display: grid;
     place-items: center;
-    background: -webkit-linear-gradient(rgb(3, 2, 87)0%, rgb(86, 180, 235));
+    background: -webkit-linear-gradient(rgb(93, 248, 202)0%, rgb(9, 134, 72));
     background-clip: text;
     -webkit-text-fill-color: transparent;
 
@@ -82,11 +85,11 @@ h1 {
 
 .item-1 {
     display: inline-block;
-    color: #060f83;
-    background: -webkit-linear-gradient(0deg,#2874A6 0%, #07cc56 100%);
+    color: #837706;
+    background: -webkit-linear-gradient(0deg,#86e0ab 0%, #26d320 100%);
     border-radius: 1280px 420px 600px 0px;
-    border: solid #8c10df 4px;   
-    padding: 25px;
+    border: solid #07691c 4px;   
+    padding: 5px;
     margin-bottom: 20px;
     margin-top: 30px;
     margin-left: 10px;
@@ -95,10 +98,10 @@ h1 {
 .item-1a {
     display: grid;
     place-items: center;
-    background: -webkit-linear-gradient(0deg,olive 0%, orange 100%);
+    background: -webkit-linear-gradient(0deg,rgb(20, 94, 27) 0%, rgb(189, 131, 23) 100%);
     border-radius: 45px 450px 300px;
     border: #16bd16 solid 3px;
-    padding: 30px;
+    padding: 10px;
     margin-bottom: 20px;
  }
  .item-1 img{
@@ -137,28 +140,29 @@ h1 {
 
  p { 
     font-weight: bold;
+    font-size:large;
     width: 80%;
     height: auto;
     margin: auto;
     margin-top: 15px;
     margin-bottom: 15px;
-    background: -webkit-linear-gradient(#920505, #0f21be);
+    background: -webkit-linear-gradient(#485721, #998544);
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: rgb(27, 26, 20) 2px 4px 10px;
+    
  }
 
 #logo{
     float: inline-start;
-    width: 100px;
-    height: 100px;    
+    font-size: larger; 
+    font-weight: bolder;
     margin-right: 150px;
 }
 
 .inscrip{
     width: 50%;
     height: auto;
-    background-color: cornflowerblue;
+    background-color: rgb(21, 87, 38);
     padding: 20px;
     margin-top: 80px;
 }
@@ -179,17 +183,16 @@ input, label{
     display: grid;
     place-items: center;
     width: 380px;
-    background-color: #4106cc;
+    background-color: #306b08;
     color: rgb(97, 152, 201);
     margin-top: 12px;
 }
 footer { 
-    display: inline-block;
-    
+    display: inline-block;   
     width: 100%;
-    background-color: rgb(71, 77, 62); 
+    background-color: rgb(99, 156, 14); 
     color: darkgoldenrod; 
-    border: 4px solid #063f06;
+    border: 4px solid #467046;
     margin-top: 100px;  
     margin-bottom: 10px;
 }
@@ -206,7 +209,7 @@ h1 {
     margin-bottom: 30px;
 }
 .search-form {
-    background: white;
+    background: rgb(171, 230, 95);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -223,7 +226,7 @@ h1 {
 }
 .search-form button {
     padding: 10px 20px;
-    background-color: #3498db;
+    background-color: #0ab318;
     color: white;
     border: none;
     border-radius: 4px;
@@ -238,7 +241,7 @@ h1 {
 }
 .annonce-card {
     display: inline-block;
-    background: white;
+    background: rgb(9, 190, 39);
     border-radius: 8px;
     padding: 25px;
     width: 350px;
@@ -293,7 +296,7 @@ h1 {
 .no-results {
     text-align: center;
     padding: 40px;
-    background: white;
+    background: rgb(167, 241, 70);
     border-radius: 8px;
     grid-column: 1 / -1;
 }

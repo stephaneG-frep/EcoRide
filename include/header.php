@@ -2,11 +2,10 @@
 ob_start();
 require_once "Users.php";
 //require_once "Admin.php";
-
 ?>
-<header>
-<div id="logo"><img src="../img/ecologo.jpg/" alt="logo-ecoride"/></div>
-    <div class="header">
+
+
+<header>   
         <nav>
                 <ul class="nav-link">
                     <li><a href="index.php">Accueil</a></li>
@@ -23,6 +22,7 @@ require_once "Users.php";
                     <li><a href="les_annonces.php">Annonces</a></li>
                     <li><a href="les_profils.php">Profils</a></li>
                     <li><a href="les_commentaires.php">Commentaires</a></li>
+                    <li><a href="recherche.php">Recherche</a></li>
                     <li><button class="deconnect"><a href="deconnexion.php">OFF</a></button></li>
                         
                 <?php
