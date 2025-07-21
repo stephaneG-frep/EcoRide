@@ -6,8 +6,8 @@
 </body>
 <footer class="footer">
     <ul>
-        <li><a href="#">Email:-Nous contacter-</a></li>
-        <li><a href="apropos.php">A-propos</a></li>
+        <li><a href="contact/contact.html">Email:-Nous contacter-</a></li>
+        <li><a href="a_propos.php">A-propos</a></li>
         <li><a href="mentions_legales.html">Mensions légales</a></li>
     </ul>
 </footer>
