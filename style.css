@@ -140,13 +140,13 @@ h1 {
 
  p { 
     font-weight: bold;
-    font-size:large;
+    font-size:x-large;
     width: 80%;
     height: auto;
     margin: auto;
     margin-top: 15px;
     margin-bottom: 15px;
-    background: -webkit-linear-gradient(#485721, #998544);
+    background: -webkit-linear-gradient(rgb(199, 255, 67)0%, rgb(113, 223, 159));
     background-clip: text;
     -webkit-text-fill-color: transparent;
     
@@ -296,7 +296,7 @@ h1 {
 .no-results {
     text-align: center;
     padding: 40px;
-    background: rgb(167, 241, 70);
+    background: rgb(88, 116, 52);
     border-radius: 8px;
     grid-column: 1 / -1;
 }
