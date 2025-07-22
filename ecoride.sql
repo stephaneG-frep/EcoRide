@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : lun. 21 juil. 2025 à 17:15
+-- Généré le : mar. 22 juil. 2025 à 07:36
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -48,7 +48,8 @@ INSERT INTO `annonce` (`id_annonce`, `departement`, `depart`, `arrive`, `vehicul
 (12, 'Essonne', 'corbeille-essonne', 'paris ', 'Voiture', 4, 23, 'xiuhj xndixn iijx', 5),
 (13, 'Bouches-du-Rhône', 'martigue', 'tours', 'Moto', 12, 22, 'xskinxzsix,zsiox,zsxz zzox,zso,xso,x', 5),
 (14, 'Savoie', 'la-cluzas', 'dijon', 'Mini-Bus', 12, 22, 'zijxzçi zxiz,xi zsxiz,xix,zs zxiz,sz', 6),
-(15, 'Calvados', 'Dives', 'Caen', 'Voiture', 3, 15, 'depart vers 8h30 de carrfour market plac leon blum', 9);
+(15, 'Calvados', 'Dives', 'Caen', 'Voiture', 3, 15, 'depart vers 8h30 de carrfour market plac leon blum', 9),
+(16, 'Landes', 'Lacanaux', 'LaRochelle', 'Camping-car', 2, 25, 'Nous partirons vers 5h du matin \r\nRDV sur le parking de la gare saint jean\r\nPas de fumeur  merci bonne journée', 11);
 
 -- --------------------------------------------------------
 
@@ -93,12 +94,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nom`, `prenom`, `email`, `password`, `photo_profil`, `role`) VALUES
-(2, 'Simpson', 'Homer', 'simpson@homer.com', '$2y$10$QhpdBdRYMLp4sABNisk/f.2L.HdLqvZJXj1bKU4hwL9XY3zXQQ546', '2UZwmAM5SPL6FODBeM5yWfvMn Donald_Trump_official_portrait.jpg', 'user'),
-(3, 'Parker', 'Peter', 'parker@peter.fr', '$2y$10$2i9iK/xSydul.eAHN64vaeoFt4ppx3xkcdIDl1Ed4pSucG.STVfxK', 'IFHbJDQor2gagOKP3Z6YCEi2H Donald_Trump_official_portrait.jpg', 'user'),
-(4, 'Gaillet', 'Stephane', 'exemple@test.com', '$2y$10$7QqfEP4sQ74sOe0cez1iVuu/lZTEErx4qNQUsYL.ENqD1Ds.VQChq', 'YACUt0SxBghxK2YBC0w06eUos_A2.jpg', 'admin'),
-(5, 'Solo', 'Han', 'solo@han.com', '$2y$10$DZNGK7OqygmCtNo0nONZE.tmIDH.eCWH3aQx.JU20h.bkpEA5E8mu', '6LiE61KIsETY3DINPlraPXmSP Donald_Trump_official_portrait.jpg', 'user'),
-(6, 'Skywalker', 'Luc', 'jedi@sith.com', '$2y$10$S2Wvpii/0O/S19PgeCSk6e/9kDj6/ceUXZWm2NvAhpATkZWVm1Z4C', 'ZqGgvDgYuXoLNaZNbBCYFwdbB_A4.jpg', 'user'),
-(9, 'Ricard', 'Paul', 'ricard@paul.fr', '$2y$10$tiE.TCE9974B2ctN7WOA8OTLmbksEwwUELUKwBc87KqDOvGjzzvSO', 'Iv2mwgp5jIyB0azzPW7oLQtMz_cats.jpg', 'user');
+(2, 'Simpson', 'Homer', 'simpson@homer.com', '$2y$10$QhpdBdRYMLp4sABNisk/f.2L.HdLqvZJXj1bKU4hwL9XY3zXQQ546', 'EP3OzKetFfMnb3kXKpsjeBP2a_homer.jpg', 'user'),
+(3, 'Parker', 'Peter', 'parker@peter.fr', '$2y$10$2i9iK/xSydul.eAHN64vaeoFt4ppx3xkcdIDl1Ed4pSucG.STVfxK', 'uCda7msp3d2qeTm3wVzMOldtD_peter.jpg', 'user'),
+(4, 'Gaillet', 'Stephane', 'exemple@test.com', '$2y$10$7QqfEP4sQ74sOe0cez1iVuu/lZTEErx4qNQUsYL.ENqD1Ds.VQChq', 'eLgbHqreJtBFo3VTgddN9UZAH_A4.jpg', 'user'),
+(5, 'Solo', 'Han', 'solo@han.com', '$2y$10$DZNGK7OqygmCtNo0nONZE.tmIDH.eCWH3aQx.JU20h.bkpEA5E8mu', '3bwPzRWRJdJXparBcVaiHDv0J_han_solo.jpg', 'user'),
+(6, 'Skywalker', 'Luc', 'jedi@sith.com', '$2y$10$S2Wvpii/0O/S19PgeCSk6e/9kDj6/ceUXZWm2NvAhpATkZWVm1Z4C', 'W7PVIfJKyGO9tztky8YnDUaPf_luc.jpg', 'user'),
+(9, 'Ricard', 'Paul', 'ricard@paul.fr', '$2y$10$tiE.TCE9974B2ctN7WOA8OTLmbksEwwUELUKwBc87KqDOvGjzzvSO', 'kIjgWBdXPgbobNPrMUQfBRI0L_cats.jpg', 'user'),
+(10, 'amstrong', 'neil', 'appollo@onze.com', '$2y$10$8v5Tvi1Ku.VtCRr/TlZR0eNlwdejB6rRUJAjlwA9R41T6H38.xljO', 'KnBPzOx4sklh7fbT9x9WM6qdb_amstrong.jpg', 'user'),
+(11, 'aldrim', 'buzz', 'buzz@buzz.com', '$2y$10$1.dOMB/qcR0ORTFYnDLoj.el8OiaTFmVpdbhAfXZ0aDdOi6PU4sYy', 'oBTwSQ2dPMVW0sLHeAzxUiha2_A2.jpg', 'user');
 
 --
 -- Index pour les tables déchargées
@@ -132,7 +135,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `annonce`
 --
 ALTER TABLE `annonce`
-  MODIFY `id_annonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_annonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `avis`
@@ -144,7 +147,7 @@ ALTER TABLE `avis`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Contraintes pour les tables déchargées
